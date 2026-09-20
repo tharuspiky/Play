@@ -7,7 +7,7 @@ const e={welcome:$('welcome'),greeting:$('greeting'),greetingText:$('greetingTex
 function greeting(){const h=new Date().getHours();return h<5?'Good Night':h<12?'Good Morning':h<17?'Good Afternoon':h<21?'Good Evening':'Good Night'}
 function updateGreetingClock(){const now=new Date();if(e.greetingText)e.greetingText.textContent=greeting();if(e.liveClock){const t=now.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});e.liveClock.textContent=t;e.liveClock.dateTime=now.toISOString();e.liveClock.setAttribute('aria-label',`Current time ${t}`)}}
 updateGreetingClock();setInterval(updateGreetingClock,1000);
-const welcomeTone=new Audio('./foldrone-welcome-tone.wav');
+const welcomeTone=new Audio('./foldrone-welcome-tone.mp3');
 welcomeTone.preload='auto';
 welcomeTone.volume=0.18;
 async function playWelcomeTone(){
