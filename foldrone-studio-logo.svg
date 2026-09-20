@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 160" role="img" aria-label="Foldrone Studio">
+<defs>
+ <linearGradient id="b" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#35d7ff"/><stop offset=".55" stop-color="#2b8cff"/><stop offset="1" stop-color="#7b43ff"/></linearGradient>
+ <linearGradient id="p" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e45cff"/><stop offset=".5" stop-color="#754cff"/><stop offset="1" stop-color="#35d7ff"/></linearGradient>
+ <linearGradient id="s" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffffff"/><stop offset="1" stop-color="#aeb6c5"/></linearGradient>
+ <filter id="g"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<g transform="translate(12 18)">
+ <path d="M8 43 37 10h52L59 43 31 78 8 101z" fill="url(#s)"/>
+ <path d="M31 78 59 43h55L86 78 59 111 31 78z" fill="url(#b)"/>
+ <path d="M59 43 86 10h51l-28 33z" fill="#eef3fb"/>
+</g>
+<text x="150" y="105" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="78" font-weight="650" letter-spacing="-4" fill="#f3f5f8">Fold</text>
+<text x="310" y="105" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="78" font-weight="650" letter-spacing="-4" fill="url(#b)">rone</text>
+<g transform="translate(520 18)" filter="url(#g)">
+ <rect x="5" y="45" width="22" height="62" rx="11" fill="url(#p)"/>
+ <rect x="35" y="12" width="22" height="95" rx="11" fill="url(#p)"/>
+ <rect x="65" y="32" width="22" height="75" rx="11" fill="url(#b)"/>
+</g>
+</svg>
