@@ -55,3 +55,10 @@ v0.4.9 Precision UI refinement
 Speed control refinement
 - Playback speed button now displays the active speed directly: 1× → 1.5× → 2× → 0.5× → 0.75× → 1×.
 - No persistent speed text label is shown outside the button; temporary on-screen confirmation remains available.
+
+Welcome Tone
+- Added a gentle, short Foldrone Play sonic welcome signature for the landing experience.
+- It attempts to play only while the landing page is active and before any media has been opened.
+- Browser autoplay restrictions are respected; if autoplay is blocked, it can start from a non-control landing-page interaction.
+- Once video/audio/direct media is opened, the welcome tone is permanently suppressed for that page session.
+- Returning home after playback does not restart the tone.

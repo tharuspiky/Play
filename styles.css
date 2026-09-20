@@ -291,3 +291,15 @@ body{overflow-x:hidden;overflow-y:auto}
 .i-volume-off{position:relative!important;width:20px!important;height:18px!important;display:block!important}
 .i-volume-off:before{content:""!important;position:absolute;left:0;top:5px;width:0;height:0;border-right:7px solid #ff718b;border-top:4px solid transparent;border-bottom:4px solid transparent;font-size:0!important}
 .i-volume-off:after{content:""!important;position:absolute;left:7px;top:1px;width:12px;height:16px;border-top:2px solid #ff718b;border-bottom:2px solid #ff718b;transform:rotate(45deg);transform-origin:center}
+
+
+/* v0.4.9 micro-refinement: corner clock + landscape compact top actions */
+.welcome{position:relative;}
+.greeting-separator{display:none!important;}
+.live-clock{position:absolute;top:22px;right:max(22px,env(safe-area-inset-right));margin:0;color:rgba(223,250,255,.78);font-size:11px;letter-spacing:.14em;font-weight:650;font-variant-numeric:tabular-nums;z-index:6;text-shadow:0 2px 14px rgba(0,0,0,.45);}
+@media(max-width:640px){.live-clock{top:18px;right:max(18px,env(safe-area-inset-right));font-size:10px;letter-spacing:.12em;}}
+@media(orientation:landscape){
+  .player-actions .load-cc-action b,
+  .player-actions .frame-action b,
+  .player-actions .pip-action b{display:none!important;}
+}
