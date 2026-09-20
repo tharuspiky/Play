@@ -62,3 +62,5 @@ Welcome Tone
 - Browser autoplay restrictions are respected; if autoplay is blocked, it can start from a non-control landing-page interaction.
 - Once video/audio/direct media is opened, the welcome tone is permanently suppressed for that page session.
 - Returning home after playback does not restart the tone.
+
+v0.4.9 final micro polish: corrected live clock positioning so the clock is anchored to the welcome/home corner rather than the greeting text block. No other UI or playback behavior changed.

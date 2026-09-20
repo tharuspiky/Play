@@ -295,6 +295,7 @@ body{overflow-x:hidden;overflow-y:auto}
 
 /* v0.4.9 micro-refinement: corner clock + landscape compact top actions */
 .welcome{position:relative;}
+.welcome .eyebrow{position:static!important;}
 .greeting-separator{display:none!important;}
 .live-clock{position:absolute;top:22px;right:max(22px,env(safe-area-inset-right));margin:0;color:rgba(223,250,255,.78);font-size:11px;letter-spacing:.14em;font-weight:650;font-variant-numeric:tabular-nums;z-index:6;text-shadow:0 2px 14px rgba(0,0,0,.45);}
 @media(max-width:640px){.live-clock{top:18px;right:max(18px,env(safe-area-inset-right));font-size:10px;letter-spacing:.12em;}}
