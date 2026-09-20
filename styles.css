@@ -238,3 +238,39 @@ body{overflow-x:hidden;overflow-y:auto}
 .sync-button.reset{border-color:rgba(255,211,77,.28);color:#ffd34d}
 .sync-help{display:block;margin-top:8px;color:#708797;font-size:8px;line-height:1.45}
 @media(max-width:480px){.sync-controls{grid-template-columns:repeat(3,minmax(0,1fr))}.sync-button.reset{grid-column:auto}}
+
+
+/* v0.4.9 Precision UI: top-action focus clearance, adaptive centered transport, landscape icon-only modes */
+.player-actions{top:max(16px,calc(env(safe-area-inset-top) + 8px));right:max(14px,calc(env(safe-area-inset-right) + 8px));padding:2px;}
+.player-actions .round-action{transform:none!important;}
+.player-actions .round-action:focus{outline:none;}
+.player-actions .round-action:focus-visible{outline:2px solid rgba(32,216,242,.72);outline-offset:2px;box-shadow:0 0 0 4px rgba(32,216,242,.10),0 12px 32px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.22);}
+.player-actions .round-action:active{transform:scale(.97)!important;}
+
+/* Larger viewports and landscape use a centered control deck. */
+@media (orientation:landscape), (min-width:901px){
+  .bottom-hud{padding-left:max(18px,env(safe-area-inset-left));padding-right:max(18px,env(safe-area-inset-right));}
+  .hud-modes-row{justify-content:center;}
+  .hud-modes{margin-left:0;margin-right:0;}
+  .hud-row{justify-content:center;}
+  .transport-group{justify-content:center;flex:0 0 auto;flex-wrap:nowrap;}
+  .hud-pill{width:46px;min-width:46px;height:42px;padding:0;justify-content:center;gap:0;}
+  .hud-pill span:last-child{display:none;}
+  .hud-modes{grid-template-columns:46px 46px 46px;width:auto;gap:8px;}
+  .close-button{margin-left:0;}
+  .transport-group{gap:8px;}
+}
+
+/* Landscape keeps the same action language, but removes descriptive words. */
+@media (orientation:landscape){
+  .player-actions{top:12px;right:max(14px,calc(env(safe-area-inset-right) + 8px));}
+  .hud-modes-row{padding-bottom:7px;}
+}
+
+/* Mute control: one clear state, one visual language. */
+.mute-button{border-color:rgba(66,233,255,.38);background:linear-gradient(145deg,rgba(14,58,76,.98),rgba(43,29,78,.98));transition:border-color .18s,box-shadow .18s,background .18s,transform .15s;}
+.mute-button .i-volume,.mute-button .i-volume-off{filter:drop-shadow(0 0 7px currentColor);transition:transform .18s,filter .18s;}
+.mute-button.is-muted{border-color:rgba(255,111,145,.58);background:linear-gradient(145deg,rgba(73,28,53,.98),rgba(49,25,73,.98));box-shadow:0 0 22px rgba(255,90,120,.12),inset 0 1px 0 rgba(255,255,255,.18);}
+.mute-button.is-muted .i-volume-off{transform:scale(1.04);}
+.mute-button:not(.is-muted) .i-volume{transform:scale(1.03);}
+.mute-button:focus-visible{outline:2px solid rgba(66,233,255,.7);outline-offset:2px;}

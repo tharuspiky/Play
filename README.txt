@@ -42,3 +42,16 @@ Phase 1 completion refinement
 - Timing is session-local and applied to the active subtitle track without modifying the source subtitle file.
 - Embedded and locally loaded text tracks are supported where the browser exposes writable cue timing.
 - Playback, audio, video, PWA, URL, casting behavior, and existing security architecture are otherwise unchanged.
+
+
+v0.4.9 Precision UI refinement
+- Top action focus/selection no longer clips against the player top edge.
+- Landscape and larger screens center the lower control deck automatically.
+- Landscape/larger-screen mode pills become icon-only while retaining accessible titles.
+- Mute/unmute state now has a clearer visual state and correct initial unmuted icon.
+- No playback, CC+, subtitle sync, casting, or other feature behavior changed.
+
+
+Speed control refinement
+- Playback speed button now displays the active speed directly: 1× → 1.5× → 2× → 0.5× → 0.75× → 1×.
+- No persistent speed text label is shown outside the button; temporary on-screen confirmation remains available.
