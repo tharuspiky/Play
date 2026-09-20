@@ -1,18 +1,20 @@
-Foldrone Play v0.4.1
-PLAY-ONLY STABILITY / CONTROL PASS
+FOLDRONE PLAY v0.4.2 — CINEMATIC / ADAPTIVE PLAYBACK PASS
 
-Fixes from v0.4:
-- Removed the fake/automatic "Play on nearby device" capsule. It was appearing merely because a browser API existed, not because a receiver had actually been discovered. Casting is intentionally silent until a real transport/discovery layer exists.
-- Fixed Original Sound after enhanced modes. Once a MediaElementSource is created, Original now uses a unity-gain bypass path to the AudioContext destination instead of disconnecting the source and muting the media.
-- CC is now a true on-player cycle control: Auto -> available embedded/sidecar language tracks -> Off.
-- Auto CC checks embedded tracks and selected sidecar subtitle files.
-- SRT and VTT sidecars are parsed/attached. Matching sidecars must be selected with the video on browsers that cannot access the containing folder.
-- PiP is capability-gated using WebKit presentation-mode support where available, then the standard PiP API. Unsupported PiP is visually disabled instead of looking broken.
-- Peacock-feather palette is applied directly to control surfaces and glyphs so icons remain readable on black.
-- Screen framing remains Original / Fit / Fill / Zoom / Pan / Back to Original.
-- Studio remains completely outside Play and is not present in the UI.
+Changes:
+• Fixed the repeat sound-delay bug by keeping one AudioContext and one MediaElementSource per media element. Sound modes are now rewired instead of cloning/recreating the media element.
+• Removed landscape lock control.
+• Screen Width is now a direct cycle: Original → Fit Screen → Fill Screen → Wide → Original.
+• Playback Speed is visible in the player action row as well as the bottom HUD.
+• Renamed/clarified video enhancement as Video Quality: Original Quality → Natural → Enhanced → Ultra Quality.
+• Replaced the old black player background with a peacock/aurora adaptive media backdrop. For local video, Foldrone samples a frame and uses a blurred ambient backdrop behind the content.
+• Preparing screen uses the supplied Foldrone Labs image as the startup/preparing artwork.
+• CC remains a direct cycle toggle and supports drag/drop or file-picker subtitle loading.
+• CC supports embedded tracks and sidecar SRT/VTT/ASS/SSA matching.
+• Public URL entry added. Direct media URLs play natively; YouTube/TikTok/Facebook URLs use provider embeds when the provider permits embedding.
+• No fake cast discovery or overlay.
 
-Web platform notes:
-- Browser PiP support is platform/container dependent.
-- WebVTT/TextTrack is used for timed captions.
-- Generic LAN casting is not claimed without a real receiver/transport.
+Online subtitle note:
+Automatic local/embedded subtitle selection is implemented. A truly automatic online subtitle download requires a provider API and terms-compliant access. This build opens an OpenSubtitles search for manual selection rather than pretending a no-key universal downloader exists.
+
+Public URL note:
+A generic webpage URL cannot always be converted into a raw media stream because many platforms protect their media URLs. Foldrone uses official/embed-compatible players for supported platforms instead of scraping or bypassing those restrictions.
