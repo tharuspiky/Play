@@ -15,7 +15,7 @@
 <body>
 <div id="app">
 <header id="topbar" class="topbar">
-  <button id="homeBtn" class="brand" aria-label="Foldrone Play home"><img src="./foldrone-play-logo.svg" alt="Foldrone Play"></button>
+  <button id="homeBtn" class="brand" aria-label="Foldrone Play home"><img src="./header-logo.png" alt="Foldrone Play"></button>
   <div class="top-actions-main">
     <button id="urlBtn" class="glass-button" aria-label="Open video URL"><span class="i-link"></span><b>URL</b></button>
     <button id="openBtn" class="glass-button" aria-label="Open media"><span class="i-folder"></span><b>Open</b></button>
@@ -24,7 +24,7 @@
 
 <main>
 <section id="welcome" class="welcome">
-  <div class="welcome-art-wrap"><img class="welcome-art" src="./homepage-art.jpg" alt="Foldrone Labs"></div>
+  <div class="welcome-art-integrated" aria-hidden="true"></div>
   <div id="weatherLayer" class="weather-layer" aria-hidden="true"></div>
   <p id="weatherAttribution" class="weather-attribution hidden">Weather data: Open-Meteo</p>
   <p id="greeting" class="eyebrow"></p>
@@ -66,11 +66,15 @@
     <div id="bottomHud" class="bottom-hud">
       <div class="seek-row"><span id="currentTime">0:00</span><input id="seek" type="range" min="0" max="0" value="0" step=".01"><span id="duration">0:00</span></div>
       <div class="hud-row">
-        <div class="hud-group">
+        <div class="hud-group transport-group">
+          <button id="prevBtn" class="hud-button transport-button" aria-label="Previous"><span class="i-prev"></span><b>Prev</b></button>
+          <button id="stopBtn" class="hud-button transport-button stop-button" aria-label="Stop"><span class="i-stop"></span><b>Stop</b></button>
           <button id="playBtn" class="main-play" aria-label="Play or pause"><span class="i-play"></span></button>
-          <button id="backBtn" class="hud-button" title="Back 10 seconds"><span class="i-back"></span><b>10</b></button>
-          <button id="forwardBtn" class="hud-button" title="Forward 10 seconds"><span class="i-forward"></span><b>10</b></button>
-          <button id="muteBtn" class="hud-button" title="Mute"><span class="i-volume"></span></button>
+          <button id="backBtn" class="hud-button transport-button" title="Back 10 seconds"><span class="i-back"></span><b>10</b></button>
+          <button id="forwardBtn" class="hud-button transport-button" title="Forward 10 seconds"><span class="i-forward"></span><b>10</b></button>
+          <button id="nextBtn" class="hud-button transport-button" aria-label="Next"><span class="i-next"></span><b>Next</b></button>
+          <button id="muteBtn" class="hud-button mute-button" title="Mute"><span class="i-volume-off"></span><b id="muteLabel">Mute</b></button>
+          <button id="repeatBtn" class="hud-button repeat-button" title="Repeat mode"><span class="i-repeat"></span><b id="repeatLabel">Repeat Off</b></button>
         </div>
         <div class="hud-group hud-modes">
           <button id="audioModeBtn" class="hud-pill sound-pill" title="Cycle sound"><span class="i-sound"></span><span>Sound · Original</span></button>
