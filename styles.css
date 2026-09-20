@@ -274,3 +274,20 @@ body{overflow-x:hidden;overflow-y:auto}
 .mute-button.is-muted .i-volume-off{transform:scale(1.04);}
 .mute-button:not(.is-muted) .i-volume{transform:scale(1.03);}
 .mute-button:focus-visible{outline:2px solid rgba(66,233,255,.7);outline-offset:2px;}
+
+/* v0.4.9 final micro-polish: live clock, speed visibility, mute restraint, play alignment */
+.greeting-separator{display:inline-block;margin:0 .45em;color:rgba(142,238,255,.55)}
+.live-clock{color:#dffaff;font-variant-numeric:tabular-nums;letter-spacing:.12em}
+.speed-rate-button{color:var(--p-gold)!important;border-color:rgba(255,211,77,.42)!important;background:linear-gradient(135deg,rgba(65,57,23,.9),rgba(49,29,76,.96))!important;}
+.speed-rate-button #speedTopLabel{display:block!important;visibility:visible!important;opacity:1!important;color:var(--p-gold)!important;font-size:11px;font-weight:950;line-height:1;text-shadow:0 0 8px rgba(255,211,77,.22);}
+.speed-rate-button:focus-visible{outline-color:rgba(255,211,77,.72)!important;box-shadow:0 0 0 4px rgba(255,211,77,.10),0 12px 32px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.22)!important}
+.main-play{display:grid!important;place-items:center!important}
+.main-play .i-play,.main-play .i-pause,.main-play .i-replay{margin:0!important;transform:translateX(0)!important;}
+.main-play .i-pause{display:block;width:12px;height:15px;position:relative}
+.main-play .i-pause:before{content:"";position:absolute;left:0;top:0;width:4px;height:15px;background:currentColor;box-shadow:8px 0 0 currentColor;border-radius:1px}
+.mute-button .i-volume,.mute-button .i-volume-off{filter:none!important}
+.mute-button:not(.is-muted){box-shadow:0 8px 24px rgba(0,0,0,.26),inset 0 1px 0 rgba(255,255,255,.16)!important}
+.mute-button.is-muted{box-shadow:0 8px 24px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.16)!important}
+.i-volume-off{position:relative!important;width:20px!important;height:18px!important;display:block!important}
+.i-volume-off:before{content:""!important;position:absolute;left:0;top:5px;width:0;height:0;border-right:7px solid #ff718b;border-top:4px solid transparent;border-bottom:4px solid transparent;font-size:0!important}
+.i-volume-off:after{content:""!important;position:absolute;left:7px;top:1px;width:12px;height:16px;border-top:2px solid #ff718b;border-bottom:2px solid #ff718b;transform:rotate(45deg);transform-origin:center}
