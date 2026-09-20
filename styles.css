@@ -9,7 +9,7 @@
 /* v0.4.4 Universal Cinematic UI overrides */
 .topbar .brand img{width:132px;height:54px;object-fit:contain;object-position:center;filter:drop-shadow(0 0 14px rgba(25,205,255,.22));mix-blend-mode:screen}
 .topbar .brand{width:150px;height:58px;padding:0;background:transparent;border:0}
-.welcome{position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(180deg,rgba(5,15,25,.34),rgba(5,18,28,.72)),url('./landing-art.png') center top/cover no-repeat;border-radius:0 0 36px 36px;box-shadow:inset 0 -160px 160px rgba(5,13,23,.72),inset 0 70px 90px rgba(5,13,23,.18)}
+.welcome{position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(180deg,rgba(5,15,25,.34),rgba(5,18,28,.72));border-radius:0 0 36px 36px;box-shadow:inset 0 -160px 160px rgba(5,13,23,.72),inset 0 70px 90px rgba(5,13,23,.18)}
 .welcome:before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(circle at 50% 24%,rgba(30,215,255,.18),transparent 28%),linear-gradient(120deg,rgba(0,192,174,.16),transparent 42%,rgba(132,94,255,.16));mix-blend-mode:screen;pointer-events:none}
 .welcome:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(5,13,22,.02) 0%,rgba(5,13,22,.10) 35%,rgba(5,13,22,.88) 100%);pointer-events:none}
 .welcome-art-integrated{display:none}
@@ -70,4 +70,110 @@
   .round-action{min-width:52px;height:48px}.round-action b{display:none}
   .hud-row{align-items:flex-end}.hud-modes{width:100%;justify-content:flex-end}.hud-pill{max-width:48vw;overflow:hidden;text-overflow:ellipsis}
   .transport-group{max-width:100%;flex-wrap:nowrap}.transport-button{flex:0 0 40px}.mute-button{flex:0 0 72px}.repeat-button{flex:0 0 72px}
+}
+
+/* v0.4.5 Universal Media Experience */
+:root{--topbar-h:68px}
+body{overflow-x:hidden;overflow-y:auto}
+.topbar{height:var(--topbar-h)}
+.topbar .brand{width:auto;height:58px}
+.topbar .brand img{width:182px;height:auto;max-height:54px;object-fit:contain;mix-blend-mode:normal;filter:drop-shadow(0 0 14px rgba(25,205,255,.18))}
+
+/* Weather belongs to the landing environment, never the playback surface. */
+.weather-layer{position:absolute;inset:0;z-index:2}
+.weather-attribution{position:absolute;right:14px;bottom:max(18px,env(safe-area-inset-bottom));z-index:5}
+
+/* Clean adaptive landing environment. The supplied transparent Play mark is integrated, not a separate card. */
+.welcome{min-height:calc(100dvh - var(--topbar-h));position:relative;isolation:isolate;overflow:hidden;background:radial-gradient(circle at 50% 34%,rgba(31,216,242,.14),transparent 30%),radial-gradient(circle at 15% 75%,rgba(0,215,195,.11),transparent 34%),radial-gradient(circle at 90% 72%,rgba(161,109,255,.13),transparent 35%),linear-gradient(135deg,#06141d,#092635 48%,#120e27);border-radius:0 0 34px 34px}
+.welcome:before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background-image:url('./foldrone-play-mark.png'),radial-gradient(circle at 50% 24%,rgba(32,216,242,.12),transparent 28%);background-repeat:no-repeat;background-position:center 9%,center;background-size:min(68vw,560px) auto,100% 100%;opacity:.17;filter:drop-shadow(0 0 50px rgba(32,216,242,.18))}
+.welcome:after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(4,14,22,.04),rgba(4,14,22,.18) 42%,rgba(4,12,20,.88) 100%)}
+.welcome h1,.welcome-sub,.welcome .eyebrow,.welcome-actions,.drop-note{z-index:4}
+.welcome h1{margin-top:clamp(80px,11vh,150px)}
+.welcome-sub{max-width:720px}
+
+/* Animated audio-only stage */
+.audio-visual{position:relative;z-index:4;width:min(620px,82vw);height:min(620px,62vh);display:grid;place-items:center;text-align:center;isolation:isolate}
+.audio-logo{width:min(260px,48vw);height:auto;filter:drop-shadow(0 0 22px rgba(32,216,242,.35)) drop-shadow(0 0 65px rgba(77,140,255,.18));animation:audioFloat 4s ease-in-out infinite}
+.audio-orbit{position:absolute;border:1px solid rgba(32,216,242,.18);border-radius:50%;pointer-events:none}
+.orbit-a{width:min(390px,70vw);height:min(390px,70vw);animation:orbitPulse 3.8s ease-in-out infinite}
+.orbit-b{width:min(500px,84vw);height:min(500px,84vw);border-color:rgba(161,109,255,.12);animation:orbitPulse 5.2s ease-in-out infinite reverse}
+.audio-wave{position:absolute;bottom:12%;display:flex;align-items:center;gap:5px;height:50px}
+.audio-wave i{width:4px;height:14px;border-radius:999px;background:linear-gradient(180deg,var(--p-cyan),var(--p-purple));animation:audioWave .9s ease-in-out infinite alternate}
+.audio-wave i:nth-child(2){animation-delay:-.15s}.audio-wave i:nth-child(3){animation-delay:-.3s}.audio-wave i:nth-child(4){animation-delay:-.45s}.audio-wave i:nth-child(5){animation-delay:-.6s}.audio-wave i:nth-child(6){animation-delay:-.35s}.audio-wave i:nth-child(7){animation-delay:-.2s}.audio-wave i:nth-child(8){animation-delay:-.5s}.audio-wave i:nth-child(9){animation-delay:-.1s}
+.audio-title{position:absolute;bottom:2%;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#eaf8ff;font-weight:800}.audio-subtitle{position:absolute;bottom:-2%;font-size:9px;color:#89a6b5;letter-spacing:.12em;text-transform:uppercase}
+@keyframes audioFloat{50%{transform:translateY(-7px) scale(1.015)}}
+@keyframes orbitPulse{50%{transform:scale(1.04) rotate(12deg);opacity:.72}}
+@keyframes audioWave{from{height:10px;opacity:.5}to{height:42px;opacity:1}}
+
+/* Cinematic preparing screen */
+.preparing{background:radial-gradient(circle at center,rgba(18,55,76,.95),#04111a 68%,#03080d)}
+.preparing-logo{position:relative;z-index:4;width:min(330px,58vw);height:auto;filter:drop-shadow(0 0 22px rgba(32,216,242,.32)) drop-shadow(0 0 80px rgba(77,140,255,.18));animation:prepLogo 2.8s ease-in-out infinite}
+.preparing-glow{position:absolute;width:min(460px,75vw);height:min(460px,75vw);border-radius:50%;background:radial-gradient(circle,rgba(32,216,242,.18),rgba(77,140,255,.08) 34%,transparent 70%);filter:blur(10px);animation:prepGlow 2.8s ease-in-out infinite}
+.preparing-ring{position:absolute;border:1px solid rgba(32,216,242,.2);border-radius:50%;animation:prepRing 2.6s ease-out infinite}
+.ring-one{width:min(400px,70vw);height:min(400px,70vw)}.ring-two{width:min(520px,86vw);height:min(520px,86vw);animation-delay:1.2s;border-color:rgba(161,109,255,.16)}
+@keyframes prepLogo{50%{transform:scale(1.025);filter:drop-shadow(0 0 35px rgba(32,216,242,.45)) drop-shadow(0 0 90px rgba(77,140,255,.22))}}
+@keyframes prepGlow{50%{transform:scale(1.1);opacity:.8}}
+@keyframes prepRing{0%{transform:scale(.75);opacity:.7}100%{transform:scale(1.12);opacity:0}}
+.preparing-spinner{bottom:7%}
+
+/* Mode controls always available on mobile, above transport controls. */
+.hud-modes-row{display:flex;justify-content:flex-end;align-items:center;padding:0 0 8px}
+.hud-modes{display:grid;grid-template-columns:minmax(120px,1fr) minmax(150px,1.2fr) 46px;gap:8px;width:min(680px,100%);margin-left:auto}
+.hud-pill{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hud-pill span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sound-pill{border-color:rgba(0,215,195,.52)}.quality-pill{border-color:rgba(239,106,216,.48)}
+
+/* Give Play the visual authority, while the transport has an intentionally relaxed rhythm. */
+.hud-row{gap:10px}
+.transport-group{gap:8px;align-items:center}
+.transport-button:nth-child(1){transform:translateY(2px)}
+.transport-button:nth-child(2){transform:translateY(-2px)}
+.main-play{width:62px;height:58px;border-radius:18px;transform:translateY(-4px) scale(1.06);border-color:rgba(32,216,242,.75);background:linear-gradient(145deg,rgba(0,215,195,.36),rgba(77,140,255,.28),rgba(161,109,255,.32));box-shadow:0 0 30px rgba(32,216,242,.18),0 14px 35px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.28)}
+.transport-button:nth-child(4){transform:translateY(1px)}.transport-button:nth-child(5){transform:translateY(-2px)}.transport-button:nth-child(6){transform:translateY(2px)}
+.mute-button{min-width:92px}.repeat-button{min-width:100px}
+
+/* Clear speaker symbol. */
+.i-volume,.i-volume-off{width:24px;height:20px;position:relative;display:block;flex:0 0 24px}
+.i-volume:before,.i-volume-off:before{content:"";position:absolute;left:0;top:6px;width:7px;height:9px;background:currentColor;clip-path:polygon(0 25%,45% 25%,100% 0,100% 100%,45% 75%,0 75%)}
+.i-volume:after{content:") ))";position:absolute;left:7px;top:-2px;color:currentColor;font-size:14px;font-weight:900;letter-spacing:-4px;white-space:nowrap}
+.i-volume{color:#42e9ff}.i-volume-off{color:#ff6f91}.i-volume-off:after{content:"×";position:absolute;left:10px;top:-7px;font-size:24px;font-weight:900;color:#ff6f91;text-shadow:0 0 10px rgba(255,90,120,.55)}
+
+/* Full player touch zones */
+.media-stage{touch-action:manipulation}
+
+/* Universal viewport math. */
+.player{min-height:calc(100svh - var(--topbar-h));padding:6px 8px max(6px,env(safe-area-inset-bottom))}
+.media-shell{height:calc(100svh - var(--topbar-h) - 12px);min-height:360px}
+@media (orientation:landscape){
+  :root{--topbar-h:52px}
+  .topbar{height:52px}
+  .topbar .brand img{width:154px;max-height:44px}
+  .player{height:calc(100svh - 52px);min-height:0;padding:4px}
+  .media-shell{height:calc(100svh - 60px);min-height:0;border-radius:16px}
+  .media-stage{inset:0 0 112px}
+  .bottom-hud{padding-bottom:max(7px,env(safe-area-inset-bottom))}
+  .hud-modes-row{padding-bottom:5px}
+}
+@media (max-width:640px){
+  .topbar .brand img{width:164px;max-height:50px}
+  .topbar .brand{width:auto}
+  .welcome{min-height:calc(100svh - var(--topbar-h))}
+  .welcome:before{background-size:min(92vw,520px) auto,100% 100%;background-position:center 10%,center;opacity:.13}
+  .welcome h1{margin-top:clamp(70px,9vh,110px);font-size:34px}
+  .hud-modes{grid-template-columns:minmax(0,1fr) minmax(0,1fr) 44px;gap:5px}
+  .hud-pill{height:42px;padding:0 8px;font-size:9px}
+  .hud-pill span:last-child{font-size:8px}
+  .hud-row{gap:6px;justify-content:space-between}
+  .transport-group{gap:5px;flex:1;justify-content:space-between}
+  .transport-button{width:42px;flex:0 0 42px}
+  .main-play{width:58px;flex:0 0 58px;height:54px}
+  .mute-button{min-width:82px;flex:0 0 82px}.repeat-button{min-width:88px;flex:0 0 88px}
+  .hud-modes-row{padding-bottom:7px}
+}
+@media (max-width:470px){
+  .topbar .brand img{width:150px}
+  .hud-modes{grid-template-columns:1fr 1fr 40px}
+  .hud-pill span:last-child{font-size:7.5px}
+  .transport-button{width:36px;flex-basis:36px}.main-play{width:52px;flex-basis:52px}.mute-button{min-width:70px;flex-basis:70px}.repeat-button{min-width:76px;flex-basis:76px}
+  .hud-button b{font-size:7px}
 }

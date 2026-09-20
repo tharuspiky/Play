@@ -15,7 +15,7 @@
 <body>
 <div id="app">
 <header id="topbar" class="topbar">
-  <button id="homeBtn" class="brand" aria-label="Foldrone Play home"><img src="./header-logo.png" alt="Foldrone Play"></button>
+  <button id="homeBtn" class="brand" aria-label="Foldrone Play home"><img src="./header-logo-new.png" alt="Foldrone Play"></button>
   <div class="top-actions-main">
     <button id="urlBtn" class="glass-button" aria-label="Open video URL"><span class="i-link"></span><b>URL</b></button>
     <button id="openBtn" class="glass-button" aria-label="Open media"><span class="i-folder"></span><b>Open</b></button>
@@ -39,14 +39,10 @@
 
 <section id="player" class="player hidden" aria-hidden="true">
   <div id="mediaShell" class="media-shell">
-    <div id="preparing" class="preparing hidden">
-      <img class="preparing-art" src="./preparing-media.jpg" alt="Foldrone Play preparing media">
-      <div class="preparing-vignette"></div>
-      <div class="preparing-spinner"><span></span><small>Preparing media</small></div>
-    </div>
+    <div id="preparing" class="preparing hidden"><div class="preparing-glow"></div><img class="preparing-logo" src="./foldrone-play-mark.png" alt="Foldrone Play"><div class="preparing-ring ring-one"></div><div class="preparing-ring ring-two"></div><div class="preparing-spinner"><span></span><small>Preparing media</small></div></div>
     <div id="mediaStage" class="media-stage">
       <div id="stageBackdrop" class="stage-backdrop"></div>
-      <div id="emptyStage" class="empty-stage"><span class="empty-ring">+</span><h2>Open a media file</h2><p>Video · audio · image · URL</p></div>
+      <div id="audioVisual" class="audio-visual hidden" aria-hidden="true"><div class="audio-orbit orbit-a"></div><div class="audio-orbit orbit-b"></div><img src="./foldrone-play-mark.png" alt="Foldrone Play" class="audio-logo"><div class="audio-wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="audio-title" id="audioTitle">Foldrone Play</div><div class="audio-subtitle">Audio playback</div></div><div id="emptyStage" class="empty-stage"><span class="empty-ring">+</span><h2>Open a media file</h2><p>Video · audio · image · URL</p></div>
       <video id="video" class="media-element hidden" playsinline webkit-playsinline preload="metadata"></video>
       <audio id="audio" class="audio-element hidden" preload="metadata"></audio>
       <img id="image" class="media-element hidden" alt="">
@@ -65,7 +61,7 @@
 
     <div id="bottomHud" class="bottom-hud">
       <div class="seek-row"><span id="currentTime">0:00</span><input id="seek" type="range" min="0" max="0" value="0" step=".01"><span id="duration">0:00</span></div>
-      <div class="hud-row">
+      <div class="hud-modes-row"><div class="hud-group hud-modes"><button id="audioModeBtn" class="hud-pill sound-pill" title="Cycle sound"><span class="i-sound"></span><span>Sound · Original</span></button><button id="videoModeBtn" class="hud-pill quality-pill" title="Cycle video quality"><span class="i-video"></span><span>Video Quality · Original Quality</span></button><button id="closeBtn" class="hud-button close-button" title="Close"><span class="i-close"></span></button></div></div><div class="hud-row">
         <div class="hud-group transport-group">
           <button id="prevBtn" class="hud-button transport-button" aria-label="Previous"><span class="i-prev"></span><b>Prev</b></button>
           <button id="stopBtn" class="hud-button transport-button stop-button" aria-label="Stop"><span class="i-stop"></span><b>Stop</b></button>
@@ -76,11 +72,7 @@
           <button id="muteBtn" class="hud-button mute-button" title="Mute"><span class="i-volume-off"></span><b id="muteLabel">Mute</b></button>
           <button id="repeatBtn" class="hud-button repeat-button" title="Repeat mode"><span class="i-repeat"></span><b id="repeatLabel">Repeat Off</b></button>
         </div>
-        <div class="hud-group hud-modes">
-          <button id="audioModeBtn" class="hud-pill sound-pill" title="Cycle sound"><span class="i-sound"></span><span>Sound · Original</span></button>
-          <button id="videoModeBtn" class="hud-pill quality-pill" title="Cycle video quality"><span class="i-video"></span><span>Video Quality · Original Quality</span></button>
-          <button id="closeBtn" class="hud-button close-button" title="Close"><span class="i-close"></span></button>
-        </div>
+        
       </div>
     </div>
   </div>

@@ -1,18 +1,20 @@
-Foldrone Play v0.4.4 • Universal Cinematic Adaptive Pass
+Foldrone Play v0.4.5
+Universal Cinematic Experience Pass
 
 Key changes:
-- iOS/WebKit PiP-safe native media audio path. Web Audio enhancement is not instantiated on iPhone/iPad so Safari/Brave PiP can retain native media audio.
-- Clear labelled Mute/Unmute control.
-- Previous / Stop / Play / Back 10 / Forward 10 / Next / Repeat controls. Repeat cycles Off → Repeat Once → Repeat Track → Repeat All.
-- Multi-file queue with Previous/Next and Repeat All.
-- URL input clears immediately after a URL is accepted.
-- Landscape video uses the full available viewport with aspect-ratio-safe contain/cover modes.
-- Width cycles Original → Fit Screen → Fill Screen → Wide.
-- Video Quality cycles Original Quality → Natural → Enhanced Quality → Ultra Quality.
-- Sound cycles Original → Enhanced → Cinema → Spatial on browsers that support Web Audio.
-- Supplied Foldrone artwork is integrated into the landing background and supplied logo artwork is used in the header.
-- Weather ambience remains an environmental layer rather than a card.
-- CC remains a direct cycle control and supports drag/drop sidecars.
+- Uses supplied full Foldrone Play header logo and supplied transparent Foldrone Play mark.
+- Landing environment no longer uses the previous large background artwork. The Play mark is integrated into the ambient background.
+- Audio-only playback gets a cinematic animated Foldrone Play visual instead of a blank stage.
+- Preparing Media uses the supplied Play mark with animated glow/rings.
+- Sound and Video Quality controls are always visible above transport controls on mobile.
+- Play/Pause can be triggered by touching the center of the media stage.
+- Touch left 30% seeks back 10 seconds; right 30% seeks forward 10 seconds.
+- Transport controls have stronger Play priority and intentionally relaxed/staggered visual rhythm.
+- Clear speaker mute/unmute control.
+- CC remains cycle-based with no popup.
+- Universal viewport sizing uses small viewport units and landscape-specific sizing.
+- Weather animation is scoped to the landing environment and does not cover playback.
+- Subtitle renderer no longer depends on a removed popup panel.
 
-Important platform note:
-Web browsers cannot guarantee audio processing through iOS PiP when a media element is routed through Web Audio. v0.4.4 prioritizes native iOS media/PiP reliability over browser-side DSP on iOS.
+Platform note:
+On iOS/iPadOS, native media playback is intentionally kept free of Web Audio processing to protect PiP/background playback reliability. Safari/WebKit still controls whether PiP audio remains active after the browser is minimized.
