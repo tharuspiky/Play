@@ -1,18 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 160" role="img" aria-label="Foldrone Play">
-<defs>
- <linearGradient id="b" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#35d7ff"/><stop offset=".55" stop-color="#1699ff"/><stop offset="1" stop-color="#4c67ff"/></linearGradient>
- <linearGradient id="s" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffffff"/><stop offset="1" stop-color="#aeb6c5"/></linearGradient>
- <filter id="g"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-</defs>
-<g transform="translate(12 18)">
- <path d="M8 43 37 10h52L59 43 31 78 8 101z" fill="url(#s)"/>
- <path d="M31 78 59 43h55L86 78 59 111 31 78z" fill="url(#b)"/>
- <path d="M59 43 86 10h51l-28 33z" fill="#eef3fb"/>
-</g>
-<text x="150" y="105" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="78" font-weight="650" letter-spacing="-4" fill="#f3f5f8">Fold</text>
-<text x="310" y="105" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="78" font-weight="650" letter-spacing="-4" fill="url(#b)">rone</text>
-<g transform="translate(525 20)" filter="url(#g)">
- <path d="M15 7 108 60 15 113z" fill="url(#b)" opacity=".98"/>
- <path d="M15 7 108 60 15 113z" fill="none" stroke="#c9f4ff" stroke-width="3" opacity=".75"/>
-</g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 220"><defs><linearGradient id="g" x1="0" x2="1"><stop stop-color="#ffffff"/><stop offset=".55" stop-color="#b9c0cb"/><stop offset="1" stop-color="#6f7886"/></linearGradient><filter id="s"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#s)"><path fill="url(#g)" d="M30 30h88l116 80-116 80H30l116-80z"/><path fill="#8d96a4" opacity=".7" d="M83 30h64l116 80-116 80H83l116-80z"/></g><text x="300" y="139" fill="#f5f6f8" font-family="Arial,sans-serif" font-size="76" font-weight="700" letter-spacing="12">FOLDRONE</text><text x="304" y="178" fill="#89919e" font-family="Arial,sans-serif" font-size="23" font-weight="700" letter-spacing="9">PLAY</text></svg>

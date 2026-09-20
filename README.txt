@@ -1,16 +1,13 @@
-Foldrone Play v0.3.1
-Clean web foundation.
+Foldrone Play v0.3.3
+Corrected modern rebuild.
 
-Goals:
-- Single source of truth for top-level UI. No JS-injected duplicate panels.
-- Native media playback path remains untouched unless enhancement is explicitly selected.
-- Clean media lifecycle when switching/reopening files.
-- Cinematic "Preparing Media…" state.
-- Responsive, overflow-safe layout across phone/tablet/desktop/ultrawide.
-- Play / Studio are modes, not separate apps.
-- Adaptive capability snapshot prepared for the shared Adaptive Experience Engine.
-- Audio/video enhancement controls are architectural placeholders with conservative local browser processing.
-- Spatial/3D/AI features are capability-gated future Media Core modules, not falsely claimed to be fully implemented by this web build.
-
-Deployment:
-npx wrangler deploy
+Key changes:
+- Switching Play/Studio while media is playing never hides, destroys or replaces the active media element.
+- Studio becomes a floating creator dock over the shared player instead of replacing the playback surface.
+- Foldrone Play branding appears in the header and cinematic media-preparation screen.
+- Modern icon-based player HUD with PiP, fullscreen, captions, framing and close controls.
+- Sound and Video modes cycle directly while watching. Each change produces a temporary top-right mode capsule.
+- Video framing: Original, Fit Screen, Fill Screen, zoom and X/Y adjustment, plus Back to Original.
+- Native playback remains the default path. Audio processing is only attached after an enhancement mode is explicitly selected.
+- Service-worker cache is v0.3.3.
+- Spatial audio and AI video are intentionally not falsely claimed as fully implemented. The current web foundation uses safe browser-capable processing and is ready for dedicated Media Core engines.

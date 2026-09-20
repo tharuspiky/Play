@@ -1,10 +1,1 @@
-{
-  "name": "Foldrone Play",
-  "short_name": "Foldrone Play",
-  "start_url": "./",
-  "display": "standalone",
-  "background_color": "#07080b",
-  "theme_color": "#07080b",
-  "description": "Foldrone Play",
-  "icons": []
-}
+{"name":"Foldrone Play","short_name":"Foldrone Play","start_url":"./","display":"standalone","background_color":"#050609","theme_color":"#050609","description":"Foldrone Play"}

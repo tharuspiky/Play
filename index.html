@@ -1,135 +1,142 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#08090c">
-  <meta name="color-scheme" content="dark">
-  <meta name="description" content="Foldrone Play">
-  <link rel="manifest" href="./manifest.webmanifest">
-  <link rel="stylesheet" href="./styles.css">
-  <title>Foldrone Play</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#06070a">
+<meta name="color-scheme" content="dark">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./foldrone-play-logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="./styles.css">
+<title>Foldrone Play</title>
 </head>
 <body>
-  <div id="app" class="app">
-    <header class="topbar">
-      <a class="brand" href="./" aria-label="Foldrone Play home">
-        <span class="brand-mark" aria-hidden="true">
-          <span class="brand-fold f1"></span><span class="brand-fold f2"></span><span class="brand-fold f3"></span>
-        </span>
-        <span class="brand-word">FOLDRONE</span>
-      </a>
-      <nav class="mode-switch" aria-label="Mode">
-        <button class="mode active" data-mode="play" type="button">Play</button>
-        <button class="mode" data-mode="studio" type="button">Studio</button>
-      </nav>
-      <button id="openBtn" class="header-action" type="button">Open Media</button>
-    </header>
+<div id="app">
+  <header class="topbar">
+    <button id="homeBtn" class="brand" aria-label="Foldrone Play home">
+      <img src="./foldrone-play-logo.svg" alt="">
+    </button>
 
-    <main>
-      <section id="welcome" class="welcome">
-        <div class="welcome-copy">
-          <p id="greeting" class="eyebrow"></p>
-          <h1>Your media.<br><span>your space.</span></h1>
-          <p class="welcome-sub">Local-first playback, adaptive sound and picture enhancement, with room to grow into immersive media.</p>
-          <div class="welcome-actions">
-            <button id="heroOpenBtn" class="primary" type="button">Open Media</button>
-            <button id="dropHint" class="secondary" type="button">Drop or choose a file</button>
-          </div>
-        </div>
-      </section>
+    <nav class="mode-switch" aria-label="Foldrone mode">
+      <button class="mode active" data-mode="play" type="button"><span class="mode-glyph play-glyph"></span><span>Play</span></button>
+      <button class="mode" data-mode="studio" type="button"><span class="mode-glyph studio-glyph"></span><span>Studio</span></button>
+    </nav>
 
-      <section id="studio" class="studio hidden" aria-hidden="true">
-        <div class="studio-card">
-          <div class="studio-icon" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
-          <div>
-            <p class="eyebrow">FOLDRONE STUDIO</p>
-            <h2>Create, transform, refine.</h2>
-            <p>Voice, background audio, captions and media creation tools will live here. The playback core remains shared with Play.</p>
-          </div>
-        </div>
-      </section>
+    <button id="openBtn" class="glass-icon" type="button" aria-label="Open media" title="Open media">
+      <span class="i-folder"></span>
+    </button>
+  </header>
 
-      <section id="player" class="player hidden" aria-hidden="true">
-        <div class="media-shell">
-          <div id="preparing" class="preparing hidden">
-            <div class="hero-logo" aria-hidden="true">
-              <span class="brand-fold f1"></span><span class="brand-fold f2"></span><span class="brand-fold f3"></span>
-            </div>
-            <p>Preparing Media…</p>
-            <span class="loader"></span>
-          </div>
-          <div id="mediaStage" class="media-stage">
-            <div id="emptyStage" class="empty-stage">
-              <div class="empty-symbol">+</div>
-              <h2>Open a media file</h2>
-              <p>Video, audio and images are supported locally in your browser.</p>
-            </div>
-            <video id="video" class="media-element hidden" playsinline preload="metadata"></video>
-            <audio id="audio" class="audio-element hidden" preload="metadata"></audio>
-            <img id="image" class="media-element image-element hidden" alt="">
-          </div>
-          <div id="statusLine" class="status-line" aria-live="polite"></div>
+  <main>
+    <section id="welcome" class="welcome">
+      <div class="welcome-logo"><img src="./foldrone-play-logo.svg" alt="Foldrone"></div>
+      <p id="greeting" class="eyebrow"></p>
+      <h1>Media, without the noise.</h1>
+      <p class="welcome-sub">A local-first player built around adaptive sound, picture and immersive media.</p>
+      <button id="heroOpenBtn" class="hero-button" type="button"><span class="i-folder"></span> Open Media</button>
+      <p class="drop-note">or drop a media file anywhere</p>
+    </section>
+
+    <section id="studioDock" class="studio-dock hidden" aria-hidden="true">
+      <div class="studio-dock-head">
+        <img src="./foldrone-studio-logo.svg" alt="">
+        <div><strong>Studio</strong><span>Creator controls are ready around the shared Media Core.</span></div>
+      </div>
+      <div class="studio-tools">
+        <button type="button" class="studio-tool"><span class="tool-mic"></span>Voice</button>
+        <button type="button" class="studio-tool"><span class="tool-wave"></span>Audio</button>
+        <button type="button" class="studio-tool"><span class="tool-cc"></span>CC</button>
+        <button type="button" class="studio-tool"><span class="tool-cut"></span>Edit</button>
+      </div>
+    </section>
+
+    <section id="player" class="player hidden" aria-hidden="true">
+      <div id="mediaShell" class="media-shell">
+        <div id="preparing" class="preparing hidden">
+          <img src="./foldrone-play-logo.svg" alt="Foldrone Play">
+          <p>Preparing Media…</p>
+          <span class="loader"></span>
         </div>
 
-        <div class="controls">
-          <div class="timeline-row">
+        <div id="mediaStage" class="media-stage">
+          <div id="emptyStage" class="empty-stage">
+            <span class="empty-ring">+</span>
+            <h2>Open a media file</h2>
+            <p>Video, audio and images play locally where the browser supports the format.</p>
+          </div>
+          <video id="video" class="media-element hidden" playsinline preload="metadata"></video>
+          <audio id="audio" class="audio-element hidden" preload="metadata"></audio>
+          <img id="image" class="media-element hidden" alt="">
+        </div>
+
+        <div id="mediaBadge" class="media-badge hidden"></div>
+
+        <div id="modeToast" class="mode-toast" aria-live="polite">
+          <span id="modeToastIcon"></span>
+          <div><small id="modeToastType">Mode</small><strong id="modeToastText">Original</strong></div>
+        </div>
+
+        <div id="playerTopActions" class="player-top-actions hidden">
+          <button id="ccBtn" class="round-action" title="Captions" aria-label="Captions"><span class="i-cc"></span></button>
+          <button id="fitBtn" class="round-action" title="Fit and framing" aria-label="Fit and framing"><span class="i-fit"></span></button>
+          <button id="pipBtn" class="round-action" title="Picture in Picture" aria-label="Picture in Picture"><span class="i-pip"></span></button>
+          <button id="fullscreenBtn" class="round-action" title="Fullscreen" aria-label="Fullscreen"><span class="i-full"></span></button>
+        </div>
+
+        <div id="fitPanel" class="popover hidden">
+          <div class="popover-title">Framing</div>
+          <div class="popover-row">
+            <button class="choice active" data-fit="original" type="button">Original</button>
+            <button class="choice" data-fit="fit" type="button">Fit Screen</button>
+            <button class="choice" data-fit="fill" type="button">Fill Screen</button>
+          </div>
+          <label class="range-line"><span>Zoom</span><input id="zoomRange" type="range" min="100" max="160" value="100"><b id="zoomValue">100%</b></label>
+          <label class="range-line"><span>Horizontal</span><input id="panXRange" type="range" min="-30" max="30" value="0"><b id="panXValue">0</b></label>
+          <label class="range-line"><span>Vertical</span><input id="panYRange" type="range" min="-30" max="30" value="0"><b id="panYValue">0</b></label>
+          <button id="resetFrameBtn" class="reset-frame" type="button">Back to Original</button>
+        </div>
+
+        <div id="ccPanel" class="popover hidden">
+          <div class="popover-title">Captions</div>
+          <div class="popover-row">
+            <button class="choice active" data-cc="off" type="button">Off</button>
+            <button class="choice" data-cc="auto" type="button">Auto</button>
+            <button class="choice" data-cc="english" type="button">English</button>
+            <button class="choice" data-cc="sinhala" type="button">සිංහල</button>
+            <button class="choice" data-cc="tamil" type="button">தமிழ்</button>
+          </div>
+        </div>
+
+        <div id="bottomHud" class="bottom-hud">
+          <div class="seek-row">
             <span id="currentTime">0:00</span>
             <input id="seek" type="range" min="0" max="0" value="0" step="0.01" aria-label="Seek">
             <span id="duration">0:00</span>
           </div>
-          <div class="control-row">
-            <div class="control-left">
-              <button id="playBtn" class="control" type="button" aria-label="Play or pause">Play</button>
-              <button id="backBtn" class="control" type="button">−10s</button>
-              <button id="forwardBtn" class="control" type="button">+10s</button>
-              <button id="muteBtn" class="control" type="button">Mute</button>
+          <div class="hud-row">
+            <div class="hud-group">
+              <button id="playBtn" class="main-play" aria-label="Play or pause" title="Play / Pause"><span class="i-play"></span></button>
+              <button id="backBtn" class="hud-button" aria-label="Back ten seconds" title="Back 10 seconds">↶<small>10</small></button>
+              <button id="forwardBtn" class="hud-button" aria-label="Forward ten seconds" title="Forward 10 seconds">↷<small>10</small></button>
+              <button id="muteBtn" class="hud-button" aria-label="Mute" title="Mute"><span class="i-volume"></span></button>
             </div>
-            <div class="control-right">
-              <button id="audioBoostBtn" class="control" type="button">Sound: Original</button>
-              <button id="videoBoostBtn" class="control" type="button">Video: Original</button>
-              <button id="ccBtn" class="control" type="button">CC</button>
-              <button id="closeBtn" class="control subtle" type="button">Close</button>
+            <div class="hud-group">
+              <button id="audioModeBtn" class="hud-pill" title="Cycle sound mode"><span class="i-sound"></span><span>Sound</span></button>
+              <button id="videoModeBtn" class="hud-pill" title="Cycle video mode"><span class="i-video"></span><span>Video</span></button>
+              <button id="closeBtn" class="hud-button" aria-label="Close media" title="Close"><span class="i-close"></span></button>
             </div>
           </div>
         </div>
+      </div>
 
-        <div id="enhancePanel" class="enhance-panel hidden">
-          <div>
-            <span class="panel-label">Audio</span>
-            <button class="choice" data-audio="original" type="button">Original</button>
-            <button class="choice" data-audio="enhanced" type="button">Enhanced</button>
-            <button class="choice" data-audio="cinema" type="button">Cinema</button>
-            <button class="choice" data-audio="spatial" type="button">Spatial*</button>
-          </div>
-          <div>
-            <span class="panel-label">Video</span>
-            <button class="choice" data-video="original" type="button">Original</button>
-            <button class="choice" data-video="natural" type="button">Natural</button>
-            <button class="choice" data-video="enhanced" type="button">Enhanced</button>
-            <button class="choice" data-video="ultra" type="button">Ultra</button>
-            <button class="choice" data-video="ai" type="button">AI*</button>
-          </div>
-          <small>* Device/engine dependent. Current web build uses safe local enhancement primitives only.</small>
-        </div>
+      <div id="statusLine" class="status-line"></div>
+    </section>
+  </main>
 
-        <div id="ccPanel" class="cc-panel hidden">
-          <span class="panel-label">Captions</span>
-          <button class="choice" data-cc="off" type="button">Off</button>
-          <button class="choice" data-cc="auto" type="button">Auto</button>
-          <button class="choice" data-cc="english" type="button">English</button>
-          <button class="choice" data-cc="sinhala" type="button">සිංහල</button>
-          <button class="choice" data-cc="tamil" type="button">தமிழ்</button>
-          <small>Embedded and external subtitle support can be added to the shared CC engine without changing the player shell.</small>
-        </div>
-      </section>
-    </main>
-
-    <div id="castCapsule" class="cast-capsule hidden" role="status"></div>
-    <div id="toast" class="toast" aria-live="polite"></div>
-  </div>
-
-  <input id="fileInput" type="file" accept="video/*,audio/*,image/*,.mkv,.m4v,.webm,.mp4,.mov,.avi,.mp3,.wav,.flac,.m4a,.aac,.ogg,.srt,.vtt,.ass,.ssa" multiple hidden>
-  <script src="./app.js" defer></script>
+  <input id="fileInput" type="file" accept="video/*,audio/*,image/*,.mkv,.m4v,.webm,.mp4,.mov,.avi,.mp3,.wav,.flac,.m4a,.aac,.ogg,.opus,.srt,.vtt,.ass,.ssa" hidden multiple>
+</div>
+<script src="./app.js" defer></script>
 </body>
 </html>
