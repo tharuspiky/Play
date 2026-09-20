@@ -24,7 +24,9 @@
 
 <main>
 <section id="welcome" class="welcome">
-  <div class="welcome-logo"><img src="./foldrone-play-logo.svg" alt="Foldrone Play"></div>
+  <div class="welcome-art-wrap"><img class="welcome-art" src="./homepage-art.jpg" alt="Foldrone Labs"></div>
+  <div id="weatherLayer" class="weather-layer" aria-hidden="true"></div>
+  <p id="weatherAttribution" class="weather-attribution hidden">Weather data: Open-Meteo</p>
   <p id="greeting" class="eyebrow"></p>
   <h1>Media, without the noise.</h1>
   <p class="welcome-sub">Local playback, adaptive sound, picture quality, captions and public video URLs in one fluid player.</p>
@@ -61,15 +63,6 @@
       <button id="fullscreenBtn" class="round-action full-action" aria-label="Fullscreen" title="Fullscreen"><span class="i-full"></span><b>Full</b></button>
     </div>
 
-    <div id="ccPanel" class="cc-popover hidden">
-      <div class="popover-title">Captions</div>
-      <div id="ccOptions" class="popover-row"></div>
-      <div id="subtitleDrop" class="subtitle-drop"><span class="i-upload"></span><div><strong>Drop subtitle here</strong><small>SRT · VTT · ASS · SSA</small></div></div>
-      <div id="subtitleFiles" class="subtitle-files"></div>
-      <button id="onlineCCBtn" class="online-subtitle"><span>⌕</span> Find subtitles online</button>
-      <small id="ccHint">CC cycles through embedded and loaded tracks. External subtitle files can be dropped at any time.</small>
-    </div>
-
     <div id="bottomHud" class="bottom-hud">
       <div class="seek-row"><span id="currentTime">0:00</span><input id="seek" type="range" min="0" max="0" value="0" step=".01"><span id="duration">0:00</span></div>
       <div class="hud-row">
@@ -78,7 +71,6 @@
           <button id="backBtn" class="hud-button" title="Back 10 seconds"><span class="i-back"></span><b>10</b></button>
           <button id="forwardBtn" class="hud-button" title="Forward 10 seconds"><span class="i-forward"></span><b>10</b></button>
           <button id="muteBtn" class="hud-button" title="Mute"><span class="i-volume"></span></button>
-          <button id="speedBtn" class="hud-pill speed-pill" title="Cycle playback speed"><span class="i-speed"></span><span>1×</span></button>
         </div>
         <div class="hud-group hud-modes">
           <button id="audioModeBtn" class="hud-pill sound-pill" title="Cycle sound"><span class="i-sound"></span><span>Sound · Original</span></button>
