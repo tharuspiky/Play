@@ -1,13 +1,29 @@
-Foldrone Play v0.3.3
-Corrected modern rebuild.
+Foldrone Play v0.4
+PLAY-ONLY CLEAN BUILD
 
-Key changes:
-- Switching Play/Studio while media is playing never hides, destroys or replaces the active media element.
-- Studio becomes a floating creator dock over the shared player instead of replacing the playback surface.
-- Foldrone Play branding appears in the header and cinematic media-preparation screen.
-- Modern icon-based player HUD with PiP, fullscreen, captions, framing and close controls.
-- Sound and Video modes cycle directly while watching. Each change produces a temporary top-right mode capsule.
-- Video framing: Original, Fit Screen, Fill Screen, zoom and X/Y adjustment, plus Back to Original.
-- Native playback remains the default path. Audio processing is only attached after an enhancement mode is explicitly selected.
-- Service-worker cache is v0.3.3.
-- Spatial audio and AI video are intentionally not falsely claimed as fully implemented. The current web foundation uses safe browser-capable processing and is ready for dedicated Media Core engines.
+Removed:
+- Studio mode/UI. Studio will be introduced separately at studio.foldrone.com after Play is finalized.
+
+Fixed / added:
+- Sound cycling now restores the native media path when returning to Original.
+- Sound and Video can be changed live while watching.
+- Top-right transient mode confirmation capsule.
+- Real browser PiP where the browser exposes it, with native WebKit fallback where available.
+- Fullscreen control plus automatic immersive/fullscreen attempt on landscape transition.
+- Landscape lock/unlock control using Screen Orientation API when supported.
+- Modern visible icon controls with a peacock-feather inspired palette.
+- Screen Framing: Original, Fit Screen, Fill Screen, zoom, horizontal/vertical adjustment, Back to Original.
+- Caption engine foundation: embedded text tracks + external SRT/VTT sidecar matching.
+- Auto CC checks embedded tracks and selected matching subtitle files. Sinhala filename preference is supported when multiple matching sidecars exist.
+- Adaptive AirPlay playback-target capsule where WebKit exposes its native picker.
+- No fake Google Cast discovery: arbitrary LAN device discovery is browser-restricted and needs a proper receiver/transport architecture.
+- Cinematic preparation screen with Foldrone Play branding.
+- Responsive player intended for portrait/landscape devices.
+- Cache version v0.4.
+
+Still intentionally engine-gated:
+- True AI super-resolution
+- Genuine object-based spatial audio
+- 3D/VR rendering
+- automatic speech-to-Sinhala/Tamil/English captions from raw media
+- full Google Cast receiver stack
