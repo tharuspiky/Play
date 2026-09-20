@@ -2,55 +2,483 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  />
+
   <meta name="theme-color" content="#07080b" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Foldrone Play" />
-  <meta name="description" content="Foldrone Play. One player. Any media. Always evolving." />
-  <link rel="manifest" href="./manifest.webmanifest" />
-  <link rel="apple-touch-icon" href="./icons/foldrone-play-192.png" />
+
+  <meta
+    name="apple-mobile-web-app-capable"
+    content="yes"
+  />
+
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent"
+  />
+
+  <meta
+    name="apple-mobile-web-app-title"
+    content="Foldrone Play"
+  />
+
+  <meta
+    name="description"
+    content="Foldrone Play. One player. Any media. Always evolving."
+  />
+
+  <link
+    rel="manifest"
+    href="./manifest.webmanifest"
+  />
+
+  <link
+    rel="apple-touch-icon"
+    href="./foldrone-play-192.png"
+  />
+
   <title>Foldrone Play</title>
-  <link rel="stylesheet" href="./src/styles.css" />
+
+  <!-- FIXED: styles.css is in repository root -->
+  <link
+    rel="stylesheet"
+    href="./styles.css"
+  />
 </head>
+
 <body>
+
 <main class="app-shell">
+
+  <!-- =========================
+       TOP BAR
+  ========================== -->
   <header class="topbar">
-    <div class="brand" aria-label="Foldrone Play"><span class="brand-name">Foldrone</span><span class="play-mark">▶</span></div>
-    <div class="top-actions"><button class="icon-button" id="searchButton" aria-label="Search media">⌕</button><button class="icon-button" id="openButton" aria-label="Open media">＋</button></div>
+
+    <div
+      class="brand"
+      aria-label="Foldrone Play"
+    >
+      <span class="brand-name">Foldrone</span>
+      <span class="play-mark">▶</span>
+    </div>
+
+    <div class="top-actions">
+
+      <button
+        class="icon-button"
+        id="searchButton"
+        aria-label="Search media"
+      >
+        ⌕
+      </button>
+
+      <button
+        class="icon-button"
+        id="openButton"
+        aria-label="Open media"
+      >
+        ＋
+      </button>
+
+    </div>
+
   </header>
 
-  <section class="player-stage" id="dropZone">
-    <div id="mediaHost" class="media-host"></div>
-    <div class="empty-state" id="emptyState">
-      <div class="empty-mark">▶</div><h1>Foldrone Play</h1>
-      <p>Open a video, audio track, or image from your device.</p>
-      <button class="primary-button" id="openPrimary">Open Media</button>
-      <input id="fileInput" type="file" hidden multiple accept="video/*,audio/*,image/*,.mkv,.avi,.mov,.mpg,.mpeg,.ts,.m2ts,.m3u,.m3u8,.flac,.opus,.ogg,.wav,.aac,.alac,.srt,.vtt" />
-      <div class="hint">Web playback uses the capabilities of your browser. Native Foldrone Media Core will expand codec coverage.</div>
-    </div>
-    <div class="drop-overlay" id="dropOverlay">Drop media to play</div>
-    <div class="media-badge" id="mediaBadge">READY</div>
-    <button class="foldra-button" id="foldraButton" title="Ask Foldra" aria-label="Ask Foldra">✦</button>
-    <div class="controls" id="controls">
-      <div class="timeline-row"><span id="currentTime">00:00</span><input id="seek" type="range" min="0" max="100" value="0" step="0.1" /><span id="duration">00:00</span></div>
-      <div class="control-row">
-        <button class="control" id="playButton">▶</button><button class="control" id="backButton">↶ 10</button><button class="control" id="forwardButton">10 ↷</button>
-        <button class="control" id="muteButton">🔊</button><input class="volume" id="volume" type="range" min="0" max="1" step="0.01" value="1" />
-        <span class="spacer"></span><button class="control" id="speedButton">1×</button><button class="control" id="subtitleButton">CC</button><button class="control" id="pipButton">▣</button><button class="control" id="fullscreenButton">⛶</button>
+
+  <!-- =========================
+       PLAYER STAGE
+  ========================== -->
+  <section
+    class="player-stage"
+    id="dropZone"
+  >
+
+    <!-- Media is dynamically inserted here -->
+    <div
+      id="mediaHost"
+      class="media-host"
+    ></div>
+
+
+    <!-- Empty / initial state -->
+    <div
+      class="empty-state"
+      id="emptyState"
+    >
+
+      <div class="empty-mark">
+        ▶
       </div>
+
+      <h1>
+        Foldrone Play
+      </h1>
+
+      <p>
+        Open a video, audio track, or image from your device.
+      </p>
+
+
+      <!-- Main Open Media button -->
+      <button
+        class="primary-button"
+        id="openPrimary"
+        type="button"
+      >
+        Open Media
+      </button>
+
+
+      <!--
+        Local media picker.
+
+        Supports:
+        Video
+        Audio
+        Images
+        Common extended media formats
+        Subtitle files
+      -->
+      <input
+        id="fileInput"
+        type="file"
+        hidden
+        multiple
+        accept="
+          video/*,
+          audio/*,
+          image/*,
+          .mkv,
+          .avi,
+          .mov,
+          .mpg,
+          .mpeg,
+          .ts,
+          .m2ts,
+          .m3u,
+          .m3u8,
+          .flac,
+          .opus,
+          .ogg,
+          .wav,
+          .aac,
+          .alac,
+          .srt,
+          .vtt
+        "
+      />
+
+
+      <div class="hint">
+        Web playback uses the capabilities of your browser.
+        Native Foldrone Media Core will expand codec coverage.
+      </div>
+
     </div>
+
+
+    <!-- Drag & drop overlay -->
+    <div
+      class="drop-overlay"
+      id="dropOverlay"
+    >
+      Drop media to play
+    </div>
+
+
+    <!-- Media type/status -->
+    <div
+      class="media-badge"
+      id="mediaBadge"
+    >
+      READY
+    </div>
+
+
+    <!-- Foldra floating button -->
+    <button
+      class="foldra-button"
+      id="foldraButton"
+      title="Ask Foldra"
+      aria-label="Ask Foldra"
+      type="button"
+    >
+      ✦
+    </button>
+
+
+    <!-- =========================
+         PLAYER CONTROLS
+    ========================== -->
+    <div
+      class="controls"
+      id="controls"
+    >
+
+      <!-- Timeline -->
+      <div class="timeline-row">
+
+        <span id="currentTime">
+          00:00
+        </span>
+
+        <input
+          id="seek"
+          type="range"
+          min="0"
+          max="100"
+          value="0"
+          step="0.1"
+        />
+
+        <span id="duration">
+          00:00
+        </span>
+
+      </div>
+
+
+      <!-- Control row -->
+      <div class="control-row">
+
+        <button
+          class="control"
+          id="playButton"
+          type="button"
+        >
+          ▶
+        </button>
+
+
+        <button
+          class="control"
+          id="backButton"
+          type="button"
+        >
+          ↶ 10
+        </button>
+
+
+        <button
+          class="control"
+          id="forwardButton"
+          type="button"
+        >
+          10 ↷
+        </button>
+
+
+        <button
+          class="control"
+          id="muteButton"
+          type="button"
+        >
+          🔊
+        </button>
+
+
+        <input
+          class="volume"
+          id="volume"
+          type="range"
+          min="0"
+          max="1"
+          step="0.01"
+          value="1"
+          aria-label="Volume"
+        />
+
+
+        <span class="spacer"></span>
+
+
+        <button
+          class="control"
+          id="speedButton"
+          type="button"
+        >
+          1×
+        </button>
+
+
+        <button
+          class="control"
+          id="subtitleButton"
+          type="button"
+        >
+          CC
+        </button>
+
+
+        <button
+          class="control"
+          id="pipButton"
+          type="button"
+        >
+          ▣
+        </button>
+
+
+        <button
+          class="control"
+          id="fullscreenButton"
+          type="button"
+        >
+          ⛶
+        </button>
+
+      </div>
+
+    </div>
+
   </section>
 
-  <section class="media-strip"><button class="tab active">Scenes</button><button class="tab">Chapters</button><button class="tab">Subtitles</button><button class="tab">Clips</button><span class="strip-spacer"></span><span class="capability" id="capability">Media Core • Ready</span></section>
 
-  <aside class="foldra-panel" id="foldraPanel" aria-hidden="true">
-    <div class="panel-header"><div><strong>Foldra</strong><span>Media intelligence</span></div><button id="closeFoldra" aria-label="Close">×</button></div>
-    <div class="foldra-prompts"><button>Find a scene</button><button>Generate subtitles</button><button>Translate this media</button><button>Understand this media</button><button>Create a clip</button></div>
-    <div class="foldra-input"><input id="foldraInput" placeholder="Ask Foldra about this media…" /><button id="foldraSend">↑</button></div>
+  <!-- =========================
+       MEDIA INTELLIGENCE STRIP
+  ========================== -->
+  <section class="media-strip">
+
+    <button
+      class="tab active"
+      type="button"
+    >
+      Scenes
+    </button>
+
+    <button
+      class="tab"
+      type="button"
+    >
+      Chapters
+    </button>
+
+    <button
+      class="tab"
+      type="button"
+    >
+      Subtitles
+    </button>
+
+    <button
+      class="tab"
+      type="button"
+    >
+      Clips
+    </button>
+
+
+    <span class="strip-spacer"></span>
+
+
+    <span
+      class="capability"
+      id="capability"
+    >
+      Media Core • Ready
+    </span>
+
+  </section>
+
+
+  <!-- =========================
+       FOLDRA PANEL
+  ========================== -->
+  <aside
+    class="foldra-panel"
+    id="foldraPanel"
+    aria-hidden="true"
+  >
+
+    <div class="panel-header">
+
+      <div>
+        <strong>Foldra</strong>
+        <span>Media intelligence</span>
+      </div>
+
+      <button
+        id="closeFoldra"
+        aria-label="Close"
+        type="button"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="foldra-prompts">
+
+      <button type="button">
+        Find a scene
+      </button>
+
+      <button type="button">
+        Generate subtitles
+      </button>
+
+      <button type="button">
+        Translate this media
+      </button>
+
+      <button type="button">
+        Understand this media
+      </button>
+
+      <button type="button">
+        Create a clip
+      </button>
+
+    </div>
+
+
+    <div class="foldra-input">
+
+      <input
+        id="foldraInput"
+        type="text"
+        placeholder="Ask Foldra about this media…"
+      />
+
+      <button
+        id="foldraSend"
+        type="button"
+      >
+        ↑
+      </button>
+
+    </div>
+
   </aside>
-  <div class="toast" id="toast" role="status"></div>
+
+
+  <!-- Toast notifications -->
+  <div
+    class="toast"
+    id="toast"
+    role="status"
+  ></div>
+
 </main>
-<script src="./src/app.js"></script>
+
+
+<!--
+  IMPORTANT FIX:
+
+  app.js is in the repository ROOT.
+
+  Old:
+  ./src/app.js
+
+  Correct:
+  ./app.js
+-->
+<script src="./app.js"></script>
+
 </body>
 </html>
