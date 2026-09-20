@@ -1,1 +1,10 @@
-{"$schema":"./node_modules/wrangler/config-schema.json","name":"play","compatibility_date":"2026-09-20","assets":{"directory":"./"}}
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "play",
+  "main": "worker.js",
+  "compatibility_date": "2026-09-20",
+  "assets": {
+    "directory": "./",
+    "binding": "ASSETS"
+  }
+}

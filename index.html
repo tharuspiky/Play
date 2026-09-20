@@ -28,13 +28,12 @@
   <div id="weatherLayer" class="weather-layer" aria-hidden="true"></div>
   <p id="weatherAttribution" class="weather-attribution hidden">Weather data: Open-Meteo</p>
   <p id="greeting" class="eyebrow"></p>
-  <h1>Media, without the noise.</h1>
-  <p class="welcome-sub">Local playback, adaptive sound, picture quality, captions and public video URLs in one fluid player.</p>
+  <h1>Unbound Playback <span class="title-separator">|</span> One Fluid Space</h1>
+  <p class="welcome-sub">The next evolution in media playback. Intelligent audio tuning and crisp visuals, crafted for absolute clarity.</p>
   <div class="welcome-actions">
     <button id="heroOpenBtn" class="hero-button"><span class="i-folder"></span> Open Media</button>
     <button id="heroUrlBtn" class="hero-button secondary"><span class="i-link"></span> Open URL</button>
   </div>
-  <p class="drop-note">drop media or subtitle files anywhere</p>
 </section>
 
 <section id="player" class="player hidden" aria-hidden="true">
@@ -53,6 +52,7 @@
 
     <div id="topActions" class="player-actions hidden">
       <button id="ccBtn" class="round-action cc-action" aria-label="Cycle captions" title="Cycle captions"><span class="i-cc"></span><b>CC</b></button>
+      <button id="loadSubBtn" class="round-action load-cc-action" aria-label="Load subtitles" title="Load subtitles"><span class="i-cc-plus"></span><b>Load</b></button>
       <button id="fitBtn" class="round-action frame-action" aria-label="Cycle screen width" title="Cycle screen width"><span class="i-fit"></span><b>Width</b></button>
       <button id="speedTopBtn" class="round-action speed-action" aria-label="Cycle playback speed" title="Cycle playback speed"><span class="i-speed"></span><b id="speedTopLabel">1×</b></button>
       <button id="pipBtn" class="round-action pip-action" aria-label="Picture in Picture" title="Picture in Picture"><span class="i-pip"></span><b>PiP</b></button>
@@ -78,6 +78,28 @@
   </div>
 </section>
 </main>
+
+<div id="subtitleModal" class="url-modal hidden" role="dialog" aria-modal="true" aria-labelledby="subtitleTitle">
+  <div class="url-card subtitle-card">
+    <div class="url-head"><div><small>FOLDRONE CC ENGINE</small><h2 id="subtitleTitle">Load Subtitles</h2></div><button id="subtitleClose" class="hud-button" aria-label="Close"><span class="i-close"></span></button></div>
+    <p class="url-help">Load a local subtitle file, or search a trusted subtitle service. Foldrone never exposes provider API keys in the browser.</p>
+    <div class="subtitle-load-actions">
+      <button id="subtitleChoose" class="modal-button">Choose Subtitle File</button>
+      <button id="subtitleOnline" class="modal-button secondary">Find Online</button>
+    </div>
+    <div id="subtitleProviders" class="subtitle-providers hidden">
+      <div class="provider-note">Search providers for the current media title, then load the downloaded SRT/VTT file back into Foldrone.</div>
+      <div class="provider-grid">
+        <a href="https://www.opensubtitles.com/" target="_blank" rel="noopener noreferrer">OpenSubtitles</a>
+        <a href="https://subdl.com/" target="_blank" rel="noopener noreferrer">SubDL</a>
+        <a href="https://www.addic7ed.com/" target="_blank" rel="noopener noreferrer">Addic7ed</a>
+        <a href="https://www.podnapisi.net/" target="_blank" rel="noopener noreferrer">Podnapisi</a>
+        <a href="https://downsub.com/" target="_blank" rel="noopener noreferrer">DownSub</a>
+      </div>
+      <small class="provider-security">Automatic provider search can be connected later through a server-side provider adapter. No provider credential is stored client-side.</small>
+    </div>
+  </div>
+</div>
 
 <div id="urlModal" class="url-modal hidden" role="dialog" aria-modal="true" aria-labelledby="urlTitle">
   <div class="url-card">
