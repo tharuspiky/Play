@@ -206,3 +206,11 @@ body{overflow-x:hidden;overflow-y:auto}
   .load-cc-action{display:grid}
   .subtitle-card{width:min(560px,calc(100vw - 24px));padding:16px}
 }
+
+/* v0.4.7 micro-refinement: icon-only transport controls + long-press protection */
+.media-stage,.media-stage *,.audio-logo,.preparing-logo,.audio-visual img{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-user-drag:none;}
+.audio-logo,.preparing-logo{-webkit-user-drag:none;pointer-events:none;}
+.transport-button,.mute-button,.repeat-button,.full-action{min-width:44px;width:44px;padding:0;justify-content:center;gap:0;}
+.transport-button b,.mute-button b,.repeat-button b,.full-action b{display:none!important;}
+@media(max-width:640px){.transport-button{width:40px;flex:0 0 40px;min-width:40px}.mute-button,.repeat-button{width:40px;flex:0 0 40px;min-width:40px}.full-action{min-width:44px;width:44px}.transport-group{gap:6px}}
+@media(max-width:470px){.transport-button{width:36px;flex-basis:36px;min-width:36px}.mute-button,.repeat-button{width:36px;flex-basis:36px;min-width:36px}.full-action{min-width:40px;width:40px}.transport-group{gap:4px}}

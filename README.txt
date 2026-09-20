@@ -1,13 +1,13 @@
-FOLDRONE PLAY v0.4.6 — UNBOUND PLAYBACK MICRO REFINEMENT
+FOLDRONE PLAY v0.4.7 — PRECISION MICRO REFINEMENT
 
 Changes
 - Homepage headline: “Unbound Playback | One Fluid Space”
 - Homepage description: “The next evolution in media playback. Intelligent audio tuning and crisp visuals, crafted for absolute clarity.”
 - Removed the “drop media or subtitle files anywhere” instruction and global drag/drop handling.
-- Added a dedicated Load Subtitles control.
+- Kept the CC+ Load Subtitles control as the single visible subtitle action; removed the separate CC button.
 - Load Subtitles supports local SRT/VTT/ASS/SSA selection.
 - Added an online subtitle provider chooser with OpenSubtitles, SubDL, Addic7ed, Podnapisi and DownSub links.
-- Kept CC itself as the direct cycle control.
+- Existing CC engine, subtitle matching and auto-CC behavior remain unchanged.
 - URL input continues to clear immediately after submission.
 - Preserved universal responsive player, audio-only visualizer, touch playback zones, queue/transport controls, PWA and existing cinematic experience.
 - Added a Cloudflare Worker security layer with CSP, HSTS, X-Content-Type-Options, Referrer-Policy, Permissions-Policy, X-Frame-Options and controlled iframe origins.
@@ -27,3 +27,8 @@ Cloudflare
 - Worker entry: worker.js
 - Static assets binding: ASSETS
 - Wrangler deploy: npx wrangler deploy
+
+- Updated browser/media-session artwork to the current Foldrone Play mark.
+- Transport controls are icon-only: Previous, Stop, Next, Mute, Repeat and Fullscreen labels removed.
+- Added long-press text/image selection protection for the central Foldrone Play mark.
+- No landscape framing/animation behavior changed.

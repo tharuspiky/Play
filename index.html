@@ -8,7 +8,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" href="./manifest.webmanifest">
-<link rel="icon" href="./foldrone-play-logo.svg" type="image/svg+xml">
+<link rel="icon" href="./foldrone-play-mark.png" type="image/png">
+<link rel="apple-touch-icon" href="./foldrone-play-mark.png">
 <link rel="stylesheet" href="./styles.css">
 <title>Foldrone Play</title>
 </head>
@@ -51,26 +52,25 @@
     <div id="modeToast" class="mode-toast" aria-live="polite"><span id="modeToastIcon"></span><div><small id="modeToastType">Mode</small><strong id="modeToastText">Original</strong></div></div>
 
     <div id="topActions" class="player-actions hidden">
-      <button id="ccBtn" class="round-action cc-action" aria-label="Cycle captions" title="Cycle captions"><span class="i-cc"></span><b>CC</b></button>
       <button id="loadSubBtn" class="round-action load-cc-action" aria-label="Load subtitles" title="Load subtitles"><span class="i-cc-plus"></span><b>Load</b></button>
       <button id="fitBtn" class="round-action frame-action" aria-label="Cycle screen width" title="Cycle screen width"><span class="i-fit"></span><b>Width</b></button>
       <button id="speedTopBtn" class="round-action speed-action" aria-label="Cycle playback speed" title="Cycle playback speed"><span class="i-speed"></span><b id="speedTopLabel">1×</b></button>
       <button id="pipBtn" class="round-action pip-action" aria-label="Picture in Picture" title="Picture in Picture"><span class="i-pip"></span><b>PiP</b></button>
-      <button id="fullscreenBtn" class="round-action full-action" aria-label="Fullscreen" title="Fullscreen"><span class="i-full"></span><b>Full</b></button>
+      <button id="fullscreenBtn" class="round-action full-action" aria-label="Fullscreen" title="Fullscreen"><span class="i-full"></span></button>
     </div>
 
     <div id="bottomHud" class="bottom-hud">
       <div class="seek-row"><span id="currentTime">0:00</span><input id="seek" type="range" min="0" max="0" value="0" step=".01"><span id="duration">0:00</span></div>
       <div class="hud-modes-row"><div class="hud-group hud-modes"><button id="audioModeBtn" class="hud-pill sound-pill" title="Cycle sound"><span class="i-sound"></span><span>Sound · Original</span></button><button id="videoModeBtn" class="hud-pill quality-pill" title="Cycle video quality"><span class="i-video"></span><span>Video Quality · Original Quality</span></button><button id="closeBtn" class="hud-button close-button" title="Close"><span class="i-close"></span></button></div></div><div class="hud-row">
         <div class="hud-group transport-group">
-          <button id="prevBtn" class="hud-button transport-button" aria-label="Previous"><span class="i-prev"></span><b>Prev</b></button>
-          <button id="stopBtn" class="hud-button transport-button stop-button" aria-label="Stop"><span class="i-stop"></span><b>Stop</b></button>
+          <button id="prevBtn" class="hud-button transport-button" aria-label="Previous" title="Previous"><span class="i-prev"></span></button>
+          <button id="stopBtn" class="hud-button transport-button stop-button" aria-label="Stop" title="Stop"><span class="i-stop"></span></button>
           <button id="playBtn" class="main-play" aria-label="Play or pause"><span class="i-play"></span></button>
           <button id="backBtn" class="hud-button transport-button" title="Back 10 seconds"><span class="i-back"></span><b>10</b></button>
           <button id="forwardBtn" class="hud-button transport-button" title="Forward 10 seconds"><span class="i-forward"></span><b>10</b></button>
-          <button id="nextBtn" class="hud-button transport-button" aria-label="Next"><span class="i-next"></span><b>Next</b></button>
-          <button id="muteBtn" class="hud-button mute-button" title="Mute"><span class="i-volume-off"></span><b id="muteLabel">Mute</b></button>
-          <button id="repeatBtn" class="hud-button repeat-button" title="Repeat mode"><span class="i-repeat"></span><b id="repeatLabel">Repeat Off</b></button>
+          <button id="nextBtn" class="hud-button transport-button" aria-label="Next" title="Next"><span class="i-next"></span></button>
+          <button id="muteBtn" class="hud-button mute-button" title="Mute" aria-label="Mute"><span class="i-volume-off"></span></button>
+          <button id="repeatBtn" class="hud-button repeat-button" title="Repeat mode" aria-label="Repeat mode"><span class="i-repeat"></span></button>
         </div>
         
       </div>
