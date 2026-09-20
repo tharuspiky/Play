@@ -214,3 +214,27 @@ body{overflow-x:hidden;overflow-y:auto}
 .transport-button b,.mute-button b,.repeat-button b,.full-action b{display:none!important;}
 @media(max-width:640px){.transport-button{width:40px;flex:0 0 40px;min-width:40px}.mute-button,.repeat-button{width:40px;flex:0 0 40px;min-width:40px}.full-action{min-width:44px;width:44px}.transport-group{gap:6px}}
 @media(max-width:470px){.transport-button{width:36px;flex-basis:36px;min-width:36px}.mute-button,.repeat-button{width:36px;flex-basis:36px;min-width:36px}.full-action{min-width:40px;width:40px}.transport-group{gap:4px}}
+
+
+/* v0.4.8 Phase 1: keep all top actions inside the playable frame */
+@media(max-width:640px){
+  .player-actions{right:10px;max-width:calc(100% - 20px);overflow:hidden;justify-content:flex-end;padding-right:1px}
+  .player-actions .round-action{flex:0 0 46px;min-width:46px;width:46px}
+}
+@media(max-width:470px){
+  .player-actions{right:8px;max-width:calc(100% - 16px);gap:4px}
+  .player-actions .round-action{flex:0 0 40px;min-width:40px;width:40px}
+}
+
+/* v0.4.8 Phase 1: CC+ timing controls */
+.subtitle-sync{margin-top:14px;padding:12px;border-radius:15px;border:1px solid rgba(32,216,242,.24);background:linear-gradient(135deg,rgba(0,215,195,.08),rgba(161,109,255,.09))}
+.sync-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:9px}
+.sync-head small{display:block;color:#7feeff;letter-spacing:.15em;font-size:8px}
+.sync-head strong{display:block;font-size:11px;margin-top:3px;max-width:68vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sync-head span{font-variant-numeric:tabular-nums;color:#fff;font-weight:900;font-size:12px}
+.sync-controls{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.sync-button{min-height:36px;border-radius:10px;border:1px solid rgba(118,226,255,.22);background:rgba(255,255,255,.06);color:#f2fbff;font-size:9px;font-weight:850}
+.sync-button:hover{border-color:var(--p-cyan);background:rgba(32,216,242,.1)}
+.sync-button.reset{border-color:rgba(255,211,77,.28);color:#ffd34d}
+.sync-help{display:block;margin-top:8px;color:#708797;font-size:8px;line-height:1.45}
+@media(max-width:480px){.sync-controls{grid-template-columns:repeat(3,minmax(0,1fr))}.sync-button.reset{grid-column:auto}}

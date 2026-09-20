@@ -32,3 +32,13 @@ Cloudflare
 - Transport controls are icon-only: Previous, Stop, Next, Mute, Repeat and Fullscreen labels removed.
 - Added long-press text/image selection protection for the central Foldrone Play mark.
 - No landscape framing/animation behavior changed.
+
+
+Phase 1 completion refinement
+- Preserves the v0.4.7 UI and CC+ workflow.
+- Fixes the mobile top-action row so the Fullscreen control remains fully inside the player.
+- Adds CC subtitle timing offset controls without changing the CC+ button.
+- Supports -0.1s / +0.1s fine adjustment, -1s / +1s coarse adjustment, and Reset.
+- Timing is session-local and applied to the active subtitle track without modifying the source subtitle file.
+- Embedded and locally loaded text tracks are supported where the browser exposes writable cue timing.
+- Playback, audio, video, PWA, URL, casting behavior, and existing security architecture are otherwise unchanged.

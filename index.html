@@ -87,6 +87,17 @@
       <button id="subtitleChoose" class="modal-button">Choose Subtitle File</button>
       <button id="subtitleOnline" class="modal-button secondary">Find Online</button>
     </div>
+    <div id="subtitleSync" class="subtitle-sync hidden" aria-live="polite">
+      <div class="sync-head"><div><small>CC SYNC</small><strong id="syncTrackName">Subtitle timing</strong></div><span id="syncOffset">0.0s</span></div>
+      <div class="sync-controls">
+        <button id="syncMinus1" class="sync-button" type="button">−1s</button>
+        <button id="syncMinus01" class="sync-button" type="button">−0.1s</button>
+        <button id="syncReset" class="sync-button reset" type="button">Reset</button>
+        <button id="syncPlus01" class="sync-button" type="button">+0.1s</button>
+        <button id="syncPlus1" class="sync-button" type="button">+1s</button>
+      </div>
+      <small class="sync-help">Adjust the active subtitle without replacing the file.</small>
+    </div>
     <div id="subtitleProviders" class="subtitle-providers hidden">
       <div class="provider-note">Search providers for the current media title, then load the downloaded SRT/VTT file back into Foldrone.</div>
       <div class="provider-grid">
