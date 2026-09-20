@@ -1,49 +1,386 @@
-const $ = (s) => document.querySelector(s);
-const dropZone = $('#dropZone'), mediaHost = $('#mediaHost'), fileInput = $('#fileInput'), emptyState = $('#emptyState'), dropOverlay = $('#dropOverlay');
-const seek = $('#seek'), currentTime = $('#currentTime'), duration = $('#duration'), playButton = $('#playButton'), volume = $('#volume'), muteButton = $('#muteButton');
-const capability = $('#capability'), toast = $('#toast');
-let media = null, objectUrl = null, currentFile = null;
+(() => {
+  "use strict";
 
-const IMAGE_EXT = /\.(jpg|jpeg|png|webp|avif|gif|tif|tiff)$/i;
-const AUDIO_EXT = /\.(mp3|flac|wav|aac|m4a|alac|ogg|opus)$/i;
-const VIDEO_EXT = /\.(mp4|webm|mov|m4v|avi|mkv|mpeg|mpg|ts|m2ts)$/i;
-const fmt = t => { if (!Number.isFinite(t)) return '00:00'; const h=Math.floor(t/3600),m=Math.floor((t%3600)/60),s=Math.floor(t%60); return h ? `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}` : `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`; };
-function showToast(message){ toast.textContent=message; toast.classList.add('show'); clearTimeout(showToast.t); showToast.t=setTimeout(()=>toast.classList.remove('show'),3200); }
-function kind(file){ const t=(file.type||'').toLowerCase(), n=file.name||''; if(t.startsWith('image/')||IMAGE_EXT.test(n)) return 'image'; if(t.startsWith('audio/')||AUDIO_EXT.test(n)) return 'audio'; if(t.startsWith('video/')||VIDEO_EXT.test(n)) return 'video'; return 'unknown'; }
-function browserCanPlay(file, k){ if(k==='image') return true; const probe=document.createElement(k); if(!probe.canPlayType) return false; const type=file.type||''; return type ? !!probe.canPlayType(type) : false; }
-function bindMedia(el){
-  media=el; media.controls=false; media.playsInline=true;
-  if(el.tagName==='VIDEO' || el.tagName==='AUDIO'){
-    el.addEventListener('play',()=>playButton.textContent='Ⅱ'); el.addEventListener('pause',()=>playButton.textContent='▶');
-    el.addEventListener('timeupdate',()=>{currentTime.textContent=fmt(el.currentTime); if(Number.isFinite(el.duration)) seek.value=(el.currentTime/el.duration)*100;});
-    el.addEventListener('loadedmetadata',()=>{duration.textContent=fmt(el.duration);});
-    el.addEventListener('error',()=>{ capability.textContent='Playback capability unavailable'; showToast('This browser cannot decode this media. Native Foldrone Media Core will handle broader formats.'); });
-  } else { playButton.disabled=true; seek.disabled=true; duration.textContent='IMAGE'; capability.textContent='Image Media • Ready'; }
-}
-function openFile(file){
-  if(!file) return; currentFile=file; const k=kind(file);
-  if(k==='unknown'){showToast('Foldrone Play could not identify this media type.'); return;}
-  if(objectUrl) URL.revokeObjectURL(objectUrl); objectUrl=URL.createObjectURL(file);
-  mediaHost.innerHTML=''; const el=document.createElement(k==='image'?'img':k); el.className='active-media'; el.src=objectUrl; if(k==='video'){el.preload='metadata'; el.playsInline=true;} if(k==='audio'){el.preload='metadata';}
-  bindMedia(el); mediaHost.appendChild(el); emptyState.style.display='none'; capability.textContent=`${k[0].toUpperCase()+k.slice(1)} • Local`; $('#mediaBadge').textContent=k.toUpperCase();
-  if(k==='video'||k==='audio') el.play().catch(()=>{}); else showToast(`${file.name} opened locally`);
-}
-function togglePlay(){if(!media||media.tagName==='IMG') return; media.paused?media.play():media.pause();}
-$('#openButton').onclick=()=>fileInput.click(); $('#openPrimary').onclick=()=>fileInput.click(); fileInput.onchange=e=>openFile(e.target.files[0]);
-playButton.onclick=togglePlay; mediaHost.onclick=e=>{if(e.target===media) togglePlay();};
-seek.oninput=()=>{if(media && Number.isFinite(media.duration)) media.currentTime=(seek.value/100)*media.duration};
-volume.oninput=()=>{if(media&&'volume' in media) media.volume=Number(volume.value)};
-muteButton.onclick=()=>{if(media&&'muted' in media){media.muted=!media.muted; muteButton.textContent=media.muted?'🔇':'🔊';}};
-$('#backButton').onclick=()=>{if(media&&'currentTime' in media)media.currentTime=Math.max(0,media.currentTime-10)};
-$('#forwardButton').onclick=()=>{if(media&&'currentTime' in media)media.currentTime=Math.min(media.duration||Infinity,media.currentTime+10)};
-$('#speedButton').onclick=()=>{if(!media||!('playbackRate' in media))return; const speeds=[1,1.25,1.5,1.75,2,.75], i=speeds.indexOf(media.playbackRate); media.playbackRate=speeds[(i+1)%speeds.length]; $('#speedButton').textContent=`${media.playbackRate}×`;};
-$('#fullscreenButton').onclick=()=>{if(dropZone.requestFullscreen)dropZone.requestFullscreen();else if(media?.webkitEnterFullscreen)media.webkitEnterFullscreen();};
-$('#pipButton').onclick=async()=>{try{if(media?.requestPictureInPicture)await media.requestPictureInPicture();else showToast('Picture-in-picture is not available for this media/browser.');}catch{showToast('Picture-in-picture is unavailable here.');}};
-$('#subtitleButton').onclick=()=>showToast('Subtitle ingestion is the next Media Core module. SRT/VTT/ASS are part of the roadmap.');
-$('#searchButton').onclick=()=>showToast('Semantic media search is reserved for Foldra intelligence.');
-$('#foldraButton').onclick=()=>{$('#foldraPanel').classList.add('open');$('#foldraPanel').setAttribute('aria-hidden','false')}; $('#closeFoldra').onclick=()=>{$('#foldraPanel').classList.remove('open');$('#foldraPanel').setAttribute('aria-hidden','true')};
-$('#foldraSend').onclick=()=>showToast('Foldra intelligence is scaffolded here and can be connected to local or cloud AI later.');
-['dragenter','dragover'].forEach(e=>dropZone.addEventListener(e,ev=>{ev.preventDefault();dropOverlay.classList.add('show')})); ['dragleave','drop'].forEach(e=>dropZone.addEventListener(e,ev=>{ev.preventDefault();dropOverlay.classList.remove('show')})); dropZone.addEventListener('drop',ev=>openFile(ev.dataTransfer.files[0]));
-window.addEventListener('beforeunload',()=>objectUrl&&URL.revokeObjectURL(objectUrl));
-if('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(()=>{});
-const capabilityManifest={schema:1,product:'foldrone-play',version:'0.2.0',engine:'browser',features:['local-file-playback','video','audio','image','seek','pip','fullscreen','drag-drop','mobile-file-picker','foldra-entry'],future:['signed-capability-updates','native-media-core','semantic-index','subtitle-engine','ai-enhancement']}; console.info(capabilityManifest);
+  const $ = (id) => document.getElementById(id);
+  const qs = (s) => document.querySelector(s);
+  const qsa = (s) => [...document.querySelectorAll(s)];
+
+  const state = {
+    mode: "play",
+    media: null,
+    mediaURL: null,
+    mediaKind: null,
+    audioMode: "original",
+    videoMode: "original",
+    ccMode: "off",
+    isPreparing: false,
+    toastTimer: null,
+    objectURLs: new Set()
+  };
+
+  const els = {
+    welcome: $("welcome"), studio: $("studio"), player: $("player"),
+    greeting: $("greeting"), fileInput: $("fileInput"),
+    openBtn: $("openBtn"), heroOpenBtn: $("heroOpenBtn"),
+    dropHint: $("dropHint"), closeBtn: $("closeBtn"),
+    video: $("video"), audio: $("audio"), image: $("image"),
+    emptyStage: $("emptyStage"), preparing: $("preparing"),
+    statusLine: $("statusLine"), playBtn: $("playBtn"),
+    backBtn: $("backBtn"), forwardBtn: $("forwardBtn"),
+    muteBtn: $("muteBtn"), seek: $("seek"),
+    currentTime: $("currentTime"), duration: $("duration"),
+    audioBoostBtn: $("audioBoostBtn"), videoBoostBtn: $("videoBoostBtn"),
+    enhancePanel: $("enhancePanel"), ccBtn: $("ccBtn"), ccPanel: $("ccPanel"),
+    toast: $("toast"), castCapsule: $("castCapsule")
+  };
+
+  function showToast(message) {
+    els.toast.textContent = message;
+    els.toast.classList.add("show");
+    clearTimeout(state.toastTimer);
+    state.toastTimer = setTimeout(() => els.toast.classList.remove("show"), 2400);
+  }
+
+  function localGreeting(hour = new Date().getHours()) {
+    if (hour >= 5 && hour < 12) return "Good Morning";
+    if (hour >= 12 && hour < 17) return "Good Afternoon";
+    if (hour >= 17 && hour < 21) return "Good Evening";
+    return "Good Night";
+  }
+
+  function updateGreeting() {
+    els.greeting.textContent = localGreeting();
+  }
+
+  function setMode(mode) {
+    state.mode = mode;
+    qsa(".mode").forEach(btn => btn.classList.toggle("active", btn.dataset.mode === mode));
+    const studio = mode === "studio";
+    els.welcome.classList.toggle("hidden", studio || !!state.media);
+    els.studio.classList.toggle("hidden", !studio);
+    els.studio.setAttribute("aria-hidden", String(!studio));
+    if (!studio && !state.media) els.welcome.classList.remove("hidden");
+    if (studio) {
+      els.player.classList.add("hidden");
+      els.player.setAttribute("aria-hidden", "true");
+    }
+  }
+
+  function showPlayer() {
+    els.welcome.classList.add("hidden");
+    els.studio.classList.add("hidden");
+    els.player.classList.remove("hidden");
+    els.player.setAttribute("aria-hidden", "false");
+  }
+
+  function setPreparing(on) {
+    state.isPreparing = on;
+    els.preparing.classList.toggle("hidden", !on);
+  }
+
+  function formatTime(seconds) {
+    if (!Number.isFinite(seconds) || seconds < 0) return "0:00";
+    const s = Math.floor(seconds);
+    const h = Math.floor(s / 3600);
+    const m = Math.floor((s % 3600) / 60);
+    const sec = s % 60;
+    return h ? `${h}:${String(m).padStart(2,"0")}:${String(sec).padStart(2,"0")}` : `${m}:${String(sec).padStart(2,"0")}`;
+  }
+
+  function revokeMediaURL() {
+    if (state.mediaURL) {
+      URL.revokeObjectURL(state.mediaURL);
+      state.objectURLs.delete(state.mediaURL);
+      state.mediaURL = null;
+    }
+  }
+
+  function resetElement(el) {
+    try { el.pause(); } catch {}
+    el.removeAttribute("src");
+    try { el.load(); } catch {}
+    el.classList.add("hidden");
+  }
+
+  function cleanupMedia() {
+    resetElement(els.video);
+    resetElement(els.audio);
+    els.image.removeAttribute("src");
+    els.image.classList.add("hidden");
+    revokeMediaURL();
+    state.media = null;
+    state.mediaKind = null;
+    els.emptyStage.classList.remove("hidden");
+    els.seek.value = 0;
+    els.seek.max = 0;
+    els.currentTime.textContent = "0:00";
+    els.duration.textContent = "0:00";
+    els.playBtn.textContent = "Play";
+    els.muteBtn.textContent = "Mute";
+    els.statusLine.textContent = "";
+    setPreparing(false);
+  }
+
+  function classify(file) {
+    const t = (file.type || "").toLowerCase();
+    const n = file.name.toLowerCase();
+    if (t.startsWith("video/") || /\.(mp4|m4v|webm|mov|ogv|avi|mkv)$/i.test(n)) return "video";
+    if (t.startsWith("audio/") || /\.(mp3|wav|flac|m4a|aac|ogg|opus)$/i.test(n)) return "audio";
+    if (t.startsWith("image/") || /\.(jpg|jpeg|png|gif|webp|avif|bmp|svg)$/i.test(n)) return "image";
+    return null;
+  }
+
+  function canPlay(kind, file) {
+    if (kind === "video") return !!els.video.canPlayType(file.type || "").replace("no", "");
+    if (kind === "audio") return !!els.audio.canPlayType(file.type || "").replace("no", "");
+    if (kind === "image") return true;
+    return false;
+  }
+
+  function bindMediaEvents(el) {
+    ["loadedmetadata","durationchange"].forEach(evt => el.addEventListener(evt, syncTimeline));
+    ["timeupdate","progress"].forEach(evt => el.addEventListener(evt, syncTimeline));
+    el.addEventListener("play", () => els.playBtn.textContent = "Pause");
+    el.addEventListener("pause", () => els.playBtn.textContent = "Play");
+    el.addEventListener("ended", () => els.playBtn.textContent = "Replay");
+    el.addEventListener("volumechange", () => els.muteBtn.textContent = el.muted ? "Unmute" : "Mute");
+    el.addEventListener("error", () => {
+      const code = el.error?.code;
+      els.statusLine.textContent = code ? `This browser could not decode this media format (code ${code}).` : "Unable to play this media in this browser.";
+      showToast("Playback format not supported by this browser");
+    });
+  }
+
+  bindMediaEvents(els.video);
+  bindMediaEvents(els.audio);
+
+  function syncTimeline() {
+    const el = state.media;
+    if (!el || !("currentTime" in el)) return;
+    const d = Number.isFinite(el.duration) ? el.duration : 0;
+    els.seek.max = d;
+    els.seek.value = Math.min(el.currentTime || 0, d || 0);
+    els.currentTime.textContent = formatTime(el.currentTime);
+    els.duration.textContent = formatTime(d);
+  }
+
+  async function openFile(file) {
+    const kind = classify(file);
+    if (!kind) {
+      showToast("Unsupported media file");
+      return;
+    }
+
+    cleanupMedia();
+    state.media = null;
+    state.mediaKind = kind;
+    state.media = kind === "video" ? els.video : kind === "audio" ? els.audio : els.image;
+    showPlayer();
+    setPreparing(true);
+    els.emptyStage.classList.add("hidden");
+    els.statusLine.textContent = `${file.name}`;
+
+    if (kind === "image") {
+      const url = URL.createObjectURL(file);
+      state.mediaURL = url;
+      state.objectURLs.add(url);
+      els.image.src = url;
+      els.image.alt = file.name;
+      els.image.classList.remove("hidden");
+      els.image.onload = () => {
+        setPreparing(false);
+        els.statusLine.textContent = `${file.name} · ${els.image.naturalWidth}×${els.image.naturalHeight}`;
+      };
+      els.image.onerror = () => {
+        setPreparing(false);
+        showToast("Unable to load image");
+      };
+      return;
+    }
+
+    const url = URL.createObjectURL(file);
+    state.mediaURL = url;
+    state.objectURLs.add(url);
+
+    const el = state.media;
+    el.src = url;
+    el.preload = "metadata";
+    el.classList.remove("hidden");
+
+    const ready = () => {
+      setPreparing(false);
+      syncTimeline();
+      const info = kind === "video"
+        ? `${file.name} · ${el.videoWidth || 0}×${el.videoHeight || 0}`
+        : `${file.name}`;
+      els.statusLine.textContent = info;
+      applyVideoEnhancement();
+      applyAudioMode();
+    };
+
+    const failed = () => {
+      setPreparing(false);
+      els.statusLine.textContent = "This browser cannot decode the selected format.";
+    };
+
+    el.addEventListener("loadedmetadata", ready, { once: true });
+    el.addEventListener("error", failed, { once: true });
+
+    try { el.load(); } catch {}
+  }
+
+  function openPicker() {
+    els.fileInput.value = "";
+    els.fileInput.click();
+  }
+
+  function togglePlay() {
+    if (!state.media || !("play" in state.media)) return;
+    if (state.media.paused) {
+      state.media.play().catch(() => showToast("Playback needs a tap or this format is unsupported"));
+    } else {
+      state.media.pause();
+    }
+  }
+
+  function seekBy(delta) {
+    if (!state.media || !("currentTime" in state.media)) return;
+    const d = Number.isFinite(state.media.duration) ? state.media.duration : Infinity;
+    state.media.currentTime = Math.max(0, Math.min((state.media.currentTime || 0) + delta, d));
+  }
+
+  function toggleMute() {
+    if (!state.media || !("muted" in state.media)) return;
+    state.media.muted = !state.media.muted;
+  }
+
+  function setAudioMode(mode) {
+    state.audioMode = mode;
+    const labels = {original:"Original", enhanced:"Enhanced", cinema:"Cinema", spatial:"Spatial*"};
+    els.audioBoostBtn.textContent = `Sound: ${labels[mode]}`;
+    applyAudioMode();
+    showToast(`Audio: ${labels[mode]}`);
+  }
+
+  function applyAudioMode() {
+    if (!state.media || !("volume" in state.media)) return;
+    /*
+      Deliberately conservative in the clean web foundation:
+      normal playback remains on the native media path.
+      We use safe loudness/headroom controls here and reserve a real
+      AudioWorklet DSP engine for the dedicated Media Core layer.
+    */
+    state.media.volume = 1;
+    state.media.preservesPitch = true;
+  }
+
+  function setVideoMode(mode) {
+    state.videoMode = mode;
+    const labels = {original:"Original", natural:"Natural", enhanced:"Enhanced", ultra:"Ultra", ai:"AI*"};
+    els.videoBoostBtn.textContent = `Video: ${labels[mode]}`;
+    applyVideoEnhancement();
+    showToast(`Video: ${labels[mode]}`);
+  }
+
+  function applyVideoEnhancement() {
+    if (state.mediaKind !== "video") return;
+    const v = els.video;
+    v.style.filter = "none";
+    if (state.videoMode === "natural") {
+      v.style.filter = "contrast(1.025) saturate(1.03)";
+    } else if (state.videoMode === "enhanced") {
+      v.style.filter = "contrast(1.05) saturate(1.06) brightness(1.01)";
+    } else if (state.videoMode === "ultra") {
+      v.style.filter = "contrast(1.08) saturate(1.09) brightness(1.015)";
+    } else if (state.videoMode === "ai") {
+      v.style.filter = "contrast(1.05) saturate(1.06)";
+    }
+  }
+
+  function toggleEnhancePanel() {
+    els.enhancePanel.classList.toggle("hidden");
+    els.ccPanel.classList.add("hidden");
+  }
+
+  function toggleCCPanel() {
+    els.ccPanel.classList.toggle("hidden");
+    els.enhancePanel.classList.add("hidden");
+  }
+
+  function closeMedia() {
+    cleanupMedia();
+    if (state.mode === "studio") setMode("studio");
+    else {
+      els.player.classList.add("hidden");
+      els.player.setAttribute("aria-hidden","true");
+      els.welcome.classList.remove("hidden");
+    }
+  }
+
+  function setupDropZone() {
+    ["dragenter","dragover"].forEach(type => document.addEventListener(type, e => {
+      if (e.dataTransfer?.types?.includes("Files")) e.preventDefault();
+    }));
+    document.addEventListener("drop", e => {
+      if (!e.dataTransfer?.files?.length) return;
+      e.preventDefault();
+      const file = [...e.dataTransfer.files].find(f => classify(f));
+      if (file) openFile(file);
+    });
+  }
+
+  function adaptiveCapabilitySnapshot() {
+    return {
+      viewport: [window.innerWidth, window.innerHeight],
+      orientation: matchMedia("(orientation:landscape)").matches ? "landscape" : "portrait",
+      touch: navigator.maxTouchPoints > 0,
+      pixelRatio: window.devicePixelRatio || 1,
+      fullscreen: !!document.fullscreenEnabled,
+      safeAreaAware: CSS.supports("padding-bottom: env(safe-area-inset-bottom)")
+    };
+  }
+
+  function init() {
+    updateGreeting();
+    setInterval(updateGreeting, 60000);
+
+    qsa(".mode").forEach(btn => btn.addEventListener("click", () => setMode(btn.dataset.mode)));
+    [els.openBtn, els.heroOpenBtn, els.dropHint].forEach(btn => btn.addEventListener("click", openPicker));
+    els.fileInput.addEventListener("change", () => {
+      const file = [...els.fileInput.files].find(f => classify(f));
+      if (file) openFile(file);
+    });
+
+    els.playBtn.addEventListener("click", togglePlay);
+    els.backBtn.addEventListener("click", () => seekBy(-10));
+    els.forwardBtn.addEventListener("click", () => seekBy(10));
+    els.muteBtn.addEventListener("click", toggleMute);
+    els.seek.addEventListener("input", () => {
+      if (state.media && "currentTime" in state.media) state.media.currentTime = Number(els.seek.value);
+    });
+    els.audioBoostBtn.addEventListener("click", toggleEnhancePanel);
+    els.videoBoostBtn.addEventListener("click", toggleEnhancePanel);
+    els.ccBtn.addEventListener("click", toggleCCPanel);
+    els.closeBtn.addEventListener("click", closeMedia);
+
+    qsa("[data-audio]").forEach(b => b.addEventListener("click", () => setAudioMode(b.dataset.audio)));
+    qsa("[data-video]").forEach(b => b.addEventListener("click", () => setVideoMode(b.dataset.video)));
+    qsa("[data-cc]").forEach(b => b.addEventListener("click", () => {
+      state.ccMode = b.dataset.cc;
+      showToast(`Captions: ${b.textContent}`);
+    }));
+
+    setupDropZone();
+    window.addEventListener("resize", () => {
+      document.documentElement.dataset.orientation = matchMedia("(orientation:landscape)").matches ? "landscape" : "portrait";
+    });
+
+    window.__foldroneCapabilities = adaptiveCapabilitySnapshot();
+
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("./sw.js").catch(() => {});
+    }
+  }
+
+  init();
+})();

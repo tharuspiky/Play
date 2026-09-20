@@ -1,37 +1,16 @@
-FOLDRONE PLAY v0.3 COMPLETE
-=============================
+Foldrone Play v0.3.1
+Clean web foundation.
 
-This is the COMPLETE root project, not a patch fragment.
+Goals:
+- Single source of truth for top-level UI. No JS-injected duplicate panels.
+- Native media playback path remains untouched unless enhancement is explicitly selected.
+- Clean media lifecycle when switching/reopening files.
+- Cinematic "Preparing Media…" state.
+- Responsive, overflow-safe layout across phone/tablet/desktop/ultrawide.
+- Play / Studio are modes, not separate apps.
+- Adaptive capability snapshot prepared for the shared Adaptive Experience Engine.
+- Audio/video enhancement controls are architectural placeholders with conservative local browser processing.
+- Spatial/3D/AI features are capability-gated future Media Core modules, not falsely claimed to be fully implemented by this web build.
 
-Files:
-- index.html        complete UI
-- styles.css        complete UI styles
-- v03.js            adaptive media layer
-- sw.js             refreshed service worker
-- manifest.webmanifest
-- wrangler.jsonc
-- Foldrone Play + Studio logo assets
-- Play/Studio PNG icons
-
-IMPORTANT:
-1. Upload/replace these files in the ROOT of the existing GitHub repo.
-2. Commit to main.
-3. Cloudflare Worker should redeploy automatically.
-4. If iPhone Safari shows an older version, close/reopen the tab or clear the site's cached PWA/service worker.
-
-Privacy/bandwidth:
-- Local media is played from the selected local file and is not uploaded for playback.
-- Weather is optional and makes a small API request only after location permission.
-- Casting uses platform routing where available. A true Foldrone local-file receiver is a future Media Core component.
-- Cloud AI/ASR is not silently invoked.
-
-v0.3 includes:
-- responsive landscape video rendering
-- local SRT/VTT auto-matching
-- CC controls
-- audio boost
-- ambient UI fallback
-- optional weather context
-- Google Cast sender integration where supported
-- AirPlay routing where supported
-- Studio voice recording foundation
+Deployment:
+npx wrangler deploy

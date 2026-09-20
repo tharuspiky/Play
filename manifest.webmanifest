@@ -1,1 +1,10 @@
-{"name":"Foldrone Play","short_name":"Foldrone Play","start_url":"./","display":"standalone","background_color":"#050608","theme_color":"#07080b","description":"Foldrone Play. Universal media playback with adaptive intelligence.","icons":[{"src":"./foldrone-play-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},{"src":"./foldrone-play-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}]}
+{
+  "name": "Foldrone Play",
+  "short_name": "Foldrone Play",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#07080b",
+  "theme_color": "#07080b",
+  "description": "Foldrone Play",
+  "icons": []
+}
