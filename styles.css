@@ -304,3 +304,15 @@ body{overflow-x:hidden;overflow-y:auto}
   .player-actions .frame-action b,
   .player-actions .pip-action b{display:none!important;}
 }
+
+/* Final welcome identity balance: greeting floats above the Foldrone Play mark while the clock remains independently corner-anchored. */
+#greetingText{display:inline-block;transform:translateY(clamp(-72px,-4.5vh,-34px));}
+.welcome:before{background-position:center 14%,center;}
+@media(max-width:640px){
+  #greetingText{transform:translateY(clamp(-82px,-5vh,-42px));}
+  .welcome:before{background-position:center 15%,center;}
+}
+@media(orientation:landscape) and (max-height:600px){
+  #greetingText{transform:translateY(-30px);}
+  .welcome:before{background-position:center 13%,center;}
+}
